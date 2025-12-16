@@ -1,5 +1,23 @@
-package com.example.demo.controller;
+package com.example.collectiondb.controller;
 
-public class AuthController{
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.collectiondb.entity.studentEntity;
+import com.example.collectiondb.service.studentService;
+
+
+@RestController
+public class studentController {
+    
+    @Autowired
+    studentService stuser;
+
+    @PostMapping("/path")
+    public studentEntity studatas(@RequestBody studentEntity student) {
+        return stuser.saveData(student);
+    }
     
 }
