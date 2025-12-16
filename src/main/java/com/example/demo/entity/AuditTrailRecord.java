@@ -36,10 +36,10 @@ public class AuditTrailRecord{
         this.details=details;
     }
 
-    public LocalDateTime getCreatedAt(){
+    public LocalDateTime getLoggedAt(){
         return loggedAt;
     }
-    public void setCreatedAt(LocalDateTime creatAt){
+    public void setLoggedAt(LocalDateTime loggedAt){
         this.loggedAt=loggedAt;
     }
 }
