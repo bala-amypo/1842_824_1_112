@@ -1,5 +1,5 @@
-package com.example.demo.config;
+package com.example.demo.exception;
 
-public class GlobalException{
+public class GlobalExceptionHandler{
     
 }
