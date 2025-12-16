@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import java.time.LocalDateTime;
 public class CredentialHolderProfile{
     
     private Long id;
@@ -8,7 +9,7 @@ public class CredentialHolderProfile{
     private String email;
     private String organization;
     private Boolean active;
-    private LocalDateTime creatAt;
+    private LocalDateTime createdAt;
 
     public Long getId(){
         return id;
@@ -38,24 +39,24 @@ public class CredentialHolderProfile{
         this.email=email;
     }
 
-    public String getId(){
+    public String getOrganization(){
         return organization;
     }
-    public void setId(String organization){
+    public void setOrganization(String organization){
         this.organization=organization;
     }
 
-    public Boolean getId(){
+    public Boolean getActive(){
         return active;
     }
-    public void setId(Boolean active){
+    public void setActive(Boolean active){
         this.active=active;
     }
 
-    public LocalDateTime getId(){
-        return creatAt;
+    public LocalDateTime getCreatedAt(){
+        return createdAt;
     }
-    public void setId(LocalDateTime creatAt){
-        this.creatAt=creatAt;
+    public void setCreatedAt(LocalDateTime creatAt){
+        this.createdAt=createdAt;
     }
 }
