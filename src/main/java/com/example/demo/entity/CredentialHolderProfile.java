@@ -13,53 +13,49 @@ public class CredentialHolderProfile{
     public Long getId(){
         return id;
     }
-
-    public void setId(){
+    public void setId(Long id){
         this.id=id;
     }
 
-    public String getId(){
+    public String getHolderId(){
         return holderId;
     }
-
-    public void setId(){
+    public void setHolderId(String holderId){
         this.holderId=holderId;
     }
-    public String getId(){
-        return id;
+
+    public String getFullName(){
+        return fullName;
+    }
+    public void setFullName(String fullName){
+        this.fullName=fullName;
     }
 
-    public void setId(){
-        this.id=id;
+    public String getEmail(){
+        return email;
     }
-    public String getId(){
-        return id;
-    }
-
-    public void setId(){
-        this.id=id;
-    }
-    public String getId(){
-        return id;
+    public void setId(String email){
+        this.email=email;
     }
 
-    public void setId(){
-        this.id=id;
+    public String getId(){
+        return organization;
+    }
+    public void setId(String organization){
+        this.organization=organization;
     }
 
     public Boolean getId(){
-        return id;
+        return active;
     }
-
-    public void setId(){
-        this.id=id;
+    public void setId(Boolean active){
+        this.active=active;
     }
 
     public LocalDateTime getId(){
-        return id;
+        return creatAt;
     }
-
-    public void setId(){
-        this.id=id;
+    public void setId(LocalDateTime creatAt){
+        this.creatAt=creatAt;
     }
 }
