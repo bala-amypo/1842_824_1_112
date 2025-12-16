@@ -24,42 +24,42 @@ public class CredentialRecord{
     public Long getHolderId(){
         return holderId;
     }
-    public void setHolderId(String holderId){
+    public void setHolderId(Long holderId){
         this.holderId=holderId;
     }
 
     public String getCredentialCode(){
-        return fullName;
+        return credentialCode;
     }
-    public void setCredentialCode(String fullName){
-        this.fullName=fullName;
+    public void setCredentialCode(String credentialCode){
+        this.credentialCode=credentialCode;
     }
 
     public String getTitle(){
-        return email;
+        return title;
     }
-    public void setTitle(String email){
-        this.email=email;
-    }
-
-    public String getOrganization(){
-        return organization;
-    }
-    public void setOrganization(String organization){
-        this.organization=organization;
+    public void setTitle(String title){
+        this.title=title;
     }
 
-    public Boolean getActive(){
-        return active;
+    public String getIssuer(){
+        return issuer;
     }
-    public void setActive(Booleanctive){
-        this.active=active;
+    public void setIssuer(String issuer){
+        this.issuer=issuer;
+    }
+
+    public LocalDateTime getIssueDate(){
+        return issueDate;
+    }
+    public void setIssueDate(LocalDateTime issueDate){
+        this.issueDate=issueDate;
     }
 
     public LocalDateTime getCreatedAt(){
-        return createdAt;
+        return expiryDate;
     }
-    public void setCreatedAt(LocalDateTime creatAt){
-        this.createdAt=createdAt;
+    public void setExpiryDate(LocalDateTime expiryDate){
+        this.expiryDate=expiryDate;
     }
 } 
