@@ -56,10 +56,31 @@ public class CredentialRecord{
         this.issueDate=issueDate;
     }
 
-    public LocalDateTime getCreatedAt(){
+    public LocalDateTime getExpiryDate(){
         return expiryDate;
     }
     public void setExpiryDate(LocalDateTime expiryDate){
         this.expiryDate=expiryDate;
+    }
+
+    public String getCredentialType(){
+        return credentialType;
+    }
+    public void setCredentialType(String credentialType){
+        this.credentialType=credentialType;
+    }
+    
+    public String getStatus(){
+        return status;
+    }
+    public void setStatus(String status){
+        this.status=status;
+    }
+
+    public String getCredentialCode(){
+        return credentialCode;
+    }
+    public void setMetaDataJson(String metadataJson){
+        this.metadataJson=metadataJson;
     }
 } 
