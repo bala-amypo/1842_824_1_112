@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.example.collectiondb.entity.studentEntity;
 
 @Repository
-public interface stuRepo extends JpaRepository<studentEntity, Long>{
+public interface CredentialHolderProfileRepository extends JpaRepository<studentEntity, Long>{
 
 }
