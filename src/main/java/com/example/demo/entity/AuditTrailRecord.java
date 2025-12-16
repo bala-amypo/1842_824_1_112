@@ -4,12 +4,10 @@ import java.time.LocalDateTime;
 public class AuditTrailRecord{
     
     private Long id;
-    private String credentialId;
+    private Long credentialId;
     private String eventType;
-    private String email;
-    private String organization;
-    private Boolean active;
-    private LocalDateTime createdAt;
+    private String details;
+    private LocalDateTime loggedAt;
 
     public Long getId(){
         return id;
@@ -18,45 +16,30 @@ public class AuditTrailRecord{
         this.id=id;
     }
 
-    public String getHolderId(){
-        return holderId;
+    public Long getCredentialId(){
+        return credentialId;
     }
-    public void setHolderId(String holderId){
-        this.holderId=holderId;
+    public void setCredentialId(String credentialId){
+        this.credentialId=credentialId;
+
+    public String getEventType(){
+        return eventType;
+    }
+    public void setEventType(String eventType){
+        this.eventType=eventType;
     }
 
-    public String getFullName(){
-        return fullName;
+    public String getDetails(){
+        return details;
     }
-    public void setFullName(String fullName){
-        this.fullName=fullName;
-    }
-
-    public String getEmail(){
-        return email;
-    }
-    public void setEmail(String email){
-        this.email=email;
-    }
-
-    public String getOrganization(){
-        return organization;
-    }
-    public void setOrganization(String organization){
-        this.organization=organization;
-    }
-
-    public Boolean getActive(){
-        return active;
-    }
-    public void setActive(Boolean active){
-        this.active=active;
+    public void setDetails(String details){
+        this.details=details;
     }
 
     public LocalDateTime getCreatedAt(){
-        return createdAt;
+        return loggedAt;
     }
     public void setCreatedAt(LocalDateTime creatAt){
-        this.createdAt=createdAt;
+        this.loggedAt=loggedAt;
     }
 }

@@ -18,7 +18,7 @@ public class VerificationRequest{
         this.id=id;
     }
 
-    public String getCredentialId(){
+    public Long getCredentialId(){
         return credentialId;
     }
     public void setCredentialId(String credentialId){
