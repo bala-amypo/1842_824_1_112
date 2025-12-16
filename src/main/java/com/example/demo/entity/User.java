@@ -1,7 +1,7 @@
 package com.example.demo.entity;
 
 import java.time.LocalDateTime;
-public class CredentialHolderProfile{
+public class User{
     
     private Long id;
     private String fullName;
@@ -37,7 +37,7 @@ public class CredentialHolderProfile{
     public void setPassword(String password){
         this.password=password;
     }
-    
+
     public LocalDateTime getCreatedAt(){
         return createdAt;
     }
