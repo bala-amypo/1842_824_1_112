@@ -38,7 +38,7 @@ public class CredentialRecord{
     public String getTitle(){
         return email;
     }
-    public void setEmail(String email){
+    public void setTitle(String email){
         this.email=email;
     }
 
