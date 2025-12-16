@@ -42,21 +42,21 @@ public class VerificationRequest{
     public String getStatus(){
         return status;
     }
-    public void setStatus(String organization){
-        this.organization=organization;
+    public void setStatus(String status){
+        this.status=status;
     }
 
-    public Boolean getActive(){
-        return active;
+    public LocalDateTime getVerifiedAt(){
+        return verifiedAt;
     }
-    public void setActive(Boolean active){
-        this.active=active;
+    public void setVerifiedAt(LocalDateTime verifiedAt){
+        this.verifiedAt=verifiedAt;
     }
 
-    public LocalDateTime getCreatedAt(){
-        return createdAt;
+    public String getResultMessage(){
+        return resultMessage;
     }
-    public void setCreatedAt(LocalDateTime creatAt){
-        this.createdAt=createdAt;
+    public void setResultMessage(String resultMessage){
+        this.resultMessage=resultMessage;
     }
 }
