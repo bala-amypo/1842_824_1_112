@@ -1,15 +1,13 @@
 package com.example.demo.entity;
 
-import java.time.LocalDateTime;
 public class VerificationRule{
     
     private Long id;
     private String ruleCode;
     private String description;
-    private String email;
-    private String organization;
+    private String appliesToType;
+    private String validationExpression;
     private Boolean active;
-    private LocalDateTime createdAt;
 
     public Long getId(){
         return id;
@@ -18,32 +16,32 @@ public class VerificationRule{
         this.id=id;
     }
 
-    public String getHolderId(){
-        return holderId;
+    public String getRuleCode(){
+        return ruleCode;
     }
-    public void setHolderId(String holderId){
-        this.holderId=holderId;
-    }
-
-    public String getFullName(){
-        return fullName;
-    }
-    public void setFullName(String fullName){
-        this.fullName=fullName;
+    public void setRuleCode(String ruleCode){
+        this.ruleCode=ruleCode;
     }
 
-    public String getEmail(){
-        return email;
+    public String getDescription(){
+        return description;
     }
-    public void setEmail(String email){
-        this.email=email;
+    public void setDescription(String description){
+        this.description=description;
     }
 
-    public String getOrganization(){
-        return organization;
+    public String getAppliesToType(){
+        return appliesToType;
     }
-    public void setOrganization(String organization){
-        this.organization=organization;
+    public void setAppliesToType(String appliesToType){
+        this.appliesToType=appliesToType;
+    }
+
+    public String getValidationExpression(){
+        return validationExpression;
+    }
+    public void setValidationExpression(String validationExpression){
+        this.validationExpression=validationExpression;
     }
 
     public Boolean getActive(){
@@ -51,12 +49,5 @@ public class VerificationRule{
     }
     public void setActive(Boolean active){
         this.active=active;
-    }
-
-    public LocalDateTime getCreatedAt(){
-        return createdAt;
-    }
-    public void setCreatedAt(LocalDateTime creatAt){
-        this.createdAt=createdAt;
     }
 }
