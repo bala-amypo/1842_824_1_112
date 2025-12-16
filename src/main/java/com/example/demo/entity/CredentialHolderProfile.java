@@ -35,7 +35,7 @@ public class CredentialHolderProfile{
     public String getEmail(){
         return email;
     }
-    public void setId(String email){
+    public void setEmail(String email){
         this.email=email;
     }
 
