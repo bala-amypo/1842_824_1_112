@@ -91,4 +91,11 @@ public class CredentialRecord{
     public void setMetaDataJson(String metadataJson){
         this.metadataJson=metadataJson;
     }
+
+    public CredentialRecord(Long id , Long holderId, String credentialCode ,String title, String issuer, LocalDateTime issueDate, LocalDateTime expiryDate, String credentialType, String status, String  metadataJson){
+        this.id=id;
+        this.holderId=holderId;
+        this.credentialCode=credentialCode;
+        this.title=title;
+    }
 } 
