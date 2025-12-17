@@ -27,7 +27,7 @@ public class AuditTrailRecord{
     public Long getCredentialId(){
         return credentialId;
     }
-    public void setCredentialId(String credentialId){
+    public void setCredentialId(Long credentialId){
         this.credentialId=credentialId;
     }
 
