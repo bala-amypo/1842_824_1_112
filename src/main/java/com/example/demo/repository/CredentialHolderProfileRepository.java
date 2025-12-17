@@ -7,6 +7,6 @@ import com.example.demo.entity.CredentialHolderProfile;
 import java.util.Long;
 
 @Repository
-public interface CredentialHolderProfile extends JpaRepository<CredentialHolderProfile, Long>{
+public interface CredentialHolderProfileRepository extends JpaRepository<CredentialHolderProfile, Long>{
 
 }
