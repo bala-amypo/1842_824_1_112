@@ -104,4 +104,7 @@ public class CredentialRecord{
         this.status=status;
         this.metadataJson=metadataJson;
     }
+
+    public CredentialRecord(){
+    }
 } 

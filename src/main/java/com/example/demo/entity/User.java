@@ -52,5 +52,7 @@ public class User{
         this.createdAt=createdAt;
     }
 
-    p
+    public User(Long id, String fullName, String email, String password, String role, LocalDateTime createdAt){
+        
+    }
 }
