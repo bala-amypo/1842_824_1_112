@@ -8,12 +8,8 @@ import org.springframework.stereotype.Service;
 import com.example.collectiondb.entity.studentEntity;
 
 @Service
-public class AuditTrailRecord {
+public interface AuditTrailRecord {
     
-    Map<Long, studentEntity> studentData=new HashMap<>();
-
-    public studentEntity saveData(studentEntity student){
-        studentData.put(student.getId(), student);
-        return student;
-    }
+    
+    
 }
