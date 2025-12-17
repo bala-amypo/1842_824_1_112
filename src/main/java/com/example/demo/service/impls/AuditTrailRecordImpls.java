@@ -9,5 +9,5 @@ import com.example.collectiondb.entity.AuditTrailRecord;
 
 @Service
 public interface AuditTrailRecordService {
-    
+    public logEvent()
 }
