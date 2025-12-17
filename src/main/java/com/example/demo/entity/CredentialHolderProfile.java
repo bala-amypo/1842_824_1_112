@@ -1,6 +1,12 @@
 package com.example.demo.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import java.time.LocalDateTime;
+
+@Entity
 public class CredentialHolderProfile{
     @Id
     @GeneratedValue (strategy=GenerationType.IDENTITY)
@@ -59,5 +65,18 @@ public class CredentialHolderProfile{
     }
     public void setCreatedAt(LocalDateTime creatAt){
         this.createdAt=createdAt;
+    }
+
+    public CredentialHolderProfile(Long id, Long holderId;
+    private String fullName;
+    private String email;
+    private String organization;
+    private Boolean active;
+    private LocalDateTime createdAt;){
+        this.id=id;
+        this.credentialId=credentialId;
+        this.eventType=eventType;
+        this.details=details;
+        this.loggedAt=loggedAt;
     }
 }

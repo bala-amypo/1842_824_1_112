@@ -59,4 +59,7 @@ public class AuditTrailRecord{
         this.details=details;
         this.loggedAt=loggedAt;
     }
+
+    public AuditTrailRecord(){
+    }
 }
