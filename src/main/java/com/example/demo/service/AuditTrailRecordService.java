@@ -10,6 +10,4 @@ import com.example.collectiondb.entity.studentEntity;
 @Service
 public interface AuditTrailRecord {
     
-    
-    
 }
