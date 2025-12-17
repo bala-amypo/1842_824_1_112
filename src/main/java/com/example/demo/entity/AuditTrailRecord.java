@@ -52,5 +52,11 @@ public class AuditTrailRecord{
         this.loggedAt=loggedAt;
     }
 
-    public
+    public AuditTrailRecord(Long id, Long credentialId, String eventType ,String details ,LocalDateTime loggedAt){
+        this.id=id;
+        this.credentialId=credentialId;
+        this.eventType=eventType;
+        this.details=details;
+        this.loggedAt=loggedAt;
+    }
 }

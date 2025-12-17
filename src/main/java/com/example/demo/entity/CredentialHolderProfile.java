@@ -2,7 +2,8 @@ package com.example.demo.entity;
 
 import java.time.LocalDateTime;
 public class CredentialHolderProfile{
-    
+    @Id
+    @GeneratedValue (strategy=GenerationType.IDENTITY)
     private Long id;
     private String holderId;
     private String fullName;
