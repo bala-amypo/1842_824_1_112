@@ -7,7 +7,8 @@ import jakarta.persistence.GenerationType;
 
 @Entity
 public class VerificationRule{
-    
+    @Id
+    @GeneratedValue (strategy=GenerationType.IDENTITY)
     private Long id;
     private String ruleCode;
     private String description;
@@ -55,5 +56,17 @@ public class VerificationRule{
     }
     public void setActive(Boolean active){
         this.active=active;
+    }
+
+    public VerificationRule(Long id, String ruleCode, String description, String appliesToType, String validationExpression, Boolean active;){
+        this.id=id;
+        this.ruleCode=ruleCode;
+        this.description=description;
+        this.appliesToType=appliesToType;
+        this.validationExpression=validationExpression;
+        this.active=active;
+    }
+
+    public VerificationRule(){
     }
 }

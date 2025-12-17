@@ -8,7 +8,8 @@ import java.time.LocalDateTime;
 
 @Entity
 public class VerificationRequest{
-    
+    @Id
+    @GeneratedValue (strategy=GenerationType.IDENTITY)
     private Long id;
     private Long credentialId;
     private String requestBy;
