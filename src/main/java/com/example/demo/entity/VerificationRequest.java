@@ -65,4 +65,14 @@ public class VerificationRequest{
     public void setResultMessage(String resultMessage){
         this.resultMessage=resultMessage;
     }
+
+    public VerificationRequest(Long id, Long credentialId, String requestBy, String verificationMethod, String status, LocalDateTime verifiedAt, String resultMessage){
+        this.id=id;
+        this.credentialId=credentialId;
+        this.requestBy=requestBy;
+        this.verificationMethod=verificationMethod;
+        this.status=status;
+        this.verifiedAt=verifiedAt;
+        this.resultMessage=resultMessage;
+    }
 }
