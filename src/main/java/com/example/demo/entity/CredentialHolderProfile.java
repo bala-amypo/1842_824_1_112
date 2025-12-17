@@ -67,16 +67,15 @@ public class CredentialHolderProfile{
         this.createdAt=createdAt;
     }
 
-    public CredentialHolderProfile(Long id, Long holderId;
-    private String fullName;
-    private String email;
-    private String organization;
-    private Boolean active;
-    private LocalDateTime createdAt;){
+    public CredentialHolderProfile(Long id, String holderId, String fullName, String email, String organization, Boolean active, LocalDateTime createdAt){
         this.id=id;
-        this.credentialId=credentialId;
-        this.eventType=eventType;
-        this.details=details;
-        this.loggedAt=loggedAt;
+        this.holderId=holderId;
+        this.fullName=fullName;
+        this.email=email;
+        this.organization=organization;
+        this.active=active;
+        this.createdAt=createdAt;
+    }
+    public CredentialHolderProfile(){
     }
 }
