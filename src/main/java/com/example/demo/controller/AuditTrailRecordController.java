@@ -11,13 +11,5 @@ import com.example.demo.service.AuditTrailRecordService;
 
 @RestController
 public class AuditTrailRecordController {
-    
-    @Autowired
-    AuditTrailRecordService stuser;
 
-    @PostMapping("/")
-    public studentEntity studatas(@RequestBody studentEntity student) {
-        return stuser.saveData(student);
-    }
-    
 }

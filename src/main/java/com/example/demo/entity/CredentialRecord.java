@@ -85,7 +85,7 @@ public class CredentialRecord{
         this.status=status;
     }
 
-    public String getCredentialCode(){
+    public String getMetaDataJson(){
         return credentialCode;
     }
     public void setMetaDataJson(String metadataJson){
