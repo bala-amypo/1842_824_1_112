@@ -5,17 +5,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.entity.AuditTrailRecordController;
-import com.example.demo.service.studentService;
+import com.example.demo.entity.AuditTrailRecord;
+import com.example.demo.service.AuditTrailRecordService;
 
 
 @RestController
-public class studentController {
+public class AuditTrailRecordController {
     
     @Autowired
-    studentService stuser;
+    AuditTrailRecordService stuser;
 
-    @PostMapping("/path")
+    @PostMapping("/")
     public studentEntity studatas(@RequestBody studentEntity student) {
         return stuser.saveData(student);
     }
