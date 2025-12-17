@@ -97,5 +97,11 @@ public class CredentialRecord{
         this.holderId=holderId;
         this.credentialCode=credentialCode;
         this.title=title;
+        this.issuer=issuer;
+        this.issueDate=issueDate;
+        this.expiryDate=expiryDate;
+        this.credentialType=credentialType;
+        this.status=status;
+        this.metadataJson=metadataJson;
     }
 } 

@@ -8,7 +8,8 @@ import java.time.LocalDateTime;
 
 @Entity
 public class User{
-    
+    @Id
+    @GeneratedValue (strategy=GenerationType.IDENTITY)
     private Long id;
     private String fullName;
     private String email;
@@ -50,4 +51,6 @@ public class User{
     public void setCreatedAt(LocalDateTime creatAt){
         this.createdAt=createdAt;
     }
+
+    p
 }
