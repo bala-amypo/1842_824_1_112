@@ -3,9 +3,9 @@ package com.example.demo.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example..entity.studentEntity;
+import com.example.demo.entity.AuditTrailRecord;
 
 @Repository
-public interface AuditTrailRecordRepository extends JpaRepository<studentEntity, Long>{
+public interface AuditTrailRecordRepository extends JpaRepository<AuditTrailRecord, Long>{
 
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.unique
 import java.time.LocalDateTime;
 
 @Entity
@@ -13,6 +14,7 @@ public class CredentialHolderProfile{
     private Long id;
     private String holderId;
     private String fullName;
+    @column(unique=true);
     private String email;
     private String organization;
     private Boolean active;
