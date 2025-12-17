@@ -1,18 +1,11 @@
-package com.example.collectiondb.service;
-
-import java.util.HashMap;
-import java.util.Map;
+package com.example.demo.service;
 
 import org.springframework.stereotype.Service;
 
-import com.example.collectiondb.entity.AuditTrailRecord;
+import com.example.demo.service.AuditTrailRecord;
 
 @Service
-public interface AuditTrailRecord {
+public interface AuditTrailRecordService {
     
-    public logEvent(AuditTrailRecord record);
-
-    public getLogsByCredential(Long credentialId);
-
-    public getAllLogs();
+    
 }
