@@ -75,4 +75,7 @@ public class VerificationRequest{
         this.verifiedAt=verifiedAt;
         this.resultMessage=resultMessage;
     }
+
+    public VerificationRequest(){
+    }
 }
