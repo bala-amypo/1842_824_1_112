@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.collectiondb.entity.studentEntity;
-import com.example.collectiondb.service.studentService;
+import com.example.demo.entity.AuditTrailRecordController;
+import com.example.demo.service.studentService;
 
 
 @RestController

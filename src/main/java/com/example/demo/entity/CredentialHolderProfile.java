@@ -14,7 +14,7 @@ public class CredentialHolderProfile{
     private Long id;
     private String holderId;
     private String fullName;
-    @Column(unique=true);
+    @Column(unique=true)
     private String email;
     private String organization;
     private Boolean active;
