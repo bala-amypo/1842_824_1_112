@@ -2,7 +2,10 @@ package com.example.demo.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import java.time.LocalDateTime;
+
 @Entity
 public class AuditTrailRecord{
 
@@ -26,6 +29,7 @@ public class AuditTrailRecord{
     }
     public void setCredentialId(String credentialId){
         this.credentialId=credentialId;
+    }
 
     public String getEventType(){
         return eventType;
@@ -47,4 +51,6 @@ public class AuditTrailRecord{
     public void setLoggedAt(LocalDateTime loggedAt){
         this.loggedAt=loggedAt;
     }
+
+    public
 }
