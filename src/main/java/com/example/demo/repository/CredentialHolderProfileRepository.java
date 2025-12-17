@@ -1,11 +1,12 @@
-package com.example.collectiondb.repository;
+package com.example.demo.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.collectiondb.entity.studentEntity;
+import com.example.demo.entity.CredentialHolderProfile;
+import java.util.Long;
 
 @Repository
-public interface CredentialHolderProfileRepository extends JpaRepository<studentEntity, Long>{
+public interface CredentialHolderProfile extends JpaRepository<CredentialHolderProfile, Long>{
 
 }
