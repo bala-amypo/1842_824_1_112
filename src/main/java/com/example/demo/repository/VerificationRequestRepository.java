@@ -7,6 +7,6 @@ import com.example.demo.entity.VerificationRequest;
 import java.util.Long;
 
 @Repository
-public interface VerificationRequest extends JpaRepository<VerificationRequest, Long>{
+public interface VerificationRequestRepository extends JpaRepository<VerificationRequest, Long>{
 
 }

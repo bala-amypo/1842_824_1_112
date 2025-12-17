@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.example.collectiondb.entity.studentEntity;
 
 @Service
-public class studentService {
+public class AuditTrailRecord {
     
     Map<Long, studentEntity> studentData=new HashMap<>();
 

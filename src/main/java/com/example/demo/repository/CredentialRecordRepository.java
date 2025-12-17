@@ -7,6 +7,6 @@ import com.example.demo.entity.CredentialRecord;
 import java.util.Long;
 
 @Repository
-public interface CredentialRecord extends JpaRepository<CredentialRecord, Long>{
+public interface CredentialRecordRepository extends JpaRepository<CredentialRecord, Long>{
 
 }
