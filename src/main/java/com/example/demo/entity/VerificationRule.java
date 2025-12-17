@@ -58,7 +58,7 @@ public class VerificationRule{
         this.active=active;
     }
 
-    public VerificationRule(Long id, String ruleCode, String description, String appliesToType, String validationExpression, Boolean active;){
+    public VerificationRule(Long id, String ruleCode, String description, String appliesToType, String validationExpression, Boolean active){
         this.id=id;
         this.ruleCode=ruleCode;
         this.description=description;
