@@ -27,7 +27,10 @@ public class CredentialHolderProfileController {
     }
 
     @GetMapping
-    public List<AuditTrailRecord> getAll(){
-        return atrs.getAllLogs();
+    public List<CredentialHolderProfile> getAllHolders(){
+        return chps.getAllHolders();
     }
+
+    @PutMapping
+    public CredentialHolderProfile updateHolderStatus(@PathVariable Long id, @RequestParam boolean active)
 }
