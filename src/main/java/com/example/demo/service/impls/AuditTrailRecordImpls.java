@@ -9,6 +9,5 @@ import org.springframework.stereotype.Service;
 public class AuditTrailRecordImpls implements AuditTrailRecordService{
     
     @Autowired
-    
-
+    AuditTrailRecordRepository atr;
 }
