@@ -8,27 +8,3 @@ public interface AuditTrailRecordService {
     Long getLogsByCredential(Long credentialId);
     List<AuditTrailRecord> getAllLogs();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
