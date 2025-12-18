@@ -24,5 +24,7 @@ public class AuditTrailRecordController {
     }
 
     @GetMapping
-    public List<AuditTrailRecord> getAllLogs()
+    public List<AuditTrailRecord> getAllLogs(){
+        return atrs.getAllLogsAuditTrailRecord();
+    }
 }
