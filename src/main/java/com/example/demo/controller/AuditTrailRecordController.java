@@ -9,11 +9,17 @@ import com.example.demo.entity.AuditTrailRecord;
 import com.example.demo.service.AuditTrailRecordService;
 
 @RestController
+@RequestMapping("/api/audit")
 public class AuditTrailRecordController {
     private final AuditTrailRecordService auditTrailRecordService;
 
     public AuditTrailRecordController(AuditTrailRecordService auditTrailRecordService){
         this.auditTrailRecordService=auditTrailRecordService;
     }
-    
+
+    @PostMapping
+    public ResponseEntity<String> logAuditEvent(AuditTrailRecord record){
+        AuditTrailRecordService.logEvent(record);
+        return ResponseEntity.ok("Audit event logged successfully")
+    }
 }

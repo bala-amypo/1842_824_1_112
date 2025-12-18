@@ -4,7 +4,7 @@ import java.util.List;
 import com.example.demo.entity.AuditTrailRecord;
 public interface AuditTrailRecordService {
     
-    void logEvent( AuditTrailRecord record);
+    void logEvent(AuditTrailRecord record);
     List<AuditTrailRecord> getLogsByCredential(Long credentialId);
     List<AuditTrailRecord> getAllLogs();
 }
