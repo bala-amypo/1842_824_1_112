@@ -9,8 +9,7 @@ import java.util.List;
 
 
 @Entity
-public class AuditTrailRecord{
-
+public class AuditTrailRecord
     @Id
     @GeneratedValue (strategy=GenerationType.IDENTITY)
     private Long id;
