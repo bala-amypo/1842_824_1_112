@@ -20,6 +20,16 @@ public class AuditTrailRecordController {
     @PostMapping
     public ResponseEntity<String> logAuditEvent(AuditTrailRecord record){
         AuditTrailRecordService.logEvent(record);
-        return ResponseEntity.ok("Audit event logged successfully")
+        return ResponseEntity.ok("Audit event logged successfully");
+    }
+
+    @GetMapping
+    public ResponseEntity<List<AuditTrailRecord>> getLogsByCredential(Long credentialId){
+        return ResponseEntity.ok(auditTrailService.getLogsByCredential(credentialId));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<AuditTrailRecord>> getAllLogs(){
+        return ResponseEntity.ok(auditTrailService.getAllLogs());
     }
 }
