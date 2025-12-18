@@ -7,10 +7,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuditTrailRecordImpls implements AuditTrailRecordService{
-    private final AuditTrailRecordRepository auditRepo;
-
-    public AuditTrailRecordImpls(AuditTrailRecordRepository auditRepo){
-        this.auditRepo=auditRepo;
-    }
+    
+    @Autowired
+    
 
 }
