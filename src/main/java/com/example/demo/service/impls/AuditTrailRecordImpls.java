@@ -1,73 +1,27 @@
-package com.example.demo.entity;
+package com.example.demo.service.impls;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import java.time.LocalDateTime;
+import com.example.demo.service.AuditTrailRecordService;
+import com.example.demo.repository.AuditTrailRecordRepository;
+import com.example.demo.entity.AuditTrailRecord;
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
 
-@Entity
-public class AuditTrailRecord {
+@Service
+public class AuditTrailRecordImpls implements AuditTrailRecordService{
+    
+    @Autowired
+    AuditTrailRecordRepository atrr;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private Long credentialId;
-    private String eventType;
-    private String details;
-    private LocalDateTime loggedAt;
-
-    // No-arg constructor (MANDATORY for JPA)
-    public AuditTrailRecord() {
+    public AuditTrailRecord logEvent(AuditTrailRecord record){
+        return atrr.save(record);
     }
 
-    // All-args constructor
-    public AuditTrailRecord(Long id, Long credentialId, String eventType, String details, LocalDateTime loggedAt) {
-        this.id = id;
-        this.credentialId = credentialId;
-        this.eventType = eventType;
-        this.details = details;
-        this.loggedAt = loggedAt;
+    public Long getLogsByCredential(Long credentialId){
+        return atrr.findById(credentialId);
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getCredentialId() {
-        return credentialId;
-    }
-
-    public void setCredentialId(Long credentialId) {
-        this.credentialId = credentialId;
-    }
-
-    public String getEventType() {
-        return eventType;
-    }
-
-    public void setEventType(String eventType) {
-        this.eventType = eventType;
-    }
-
-    public String getDetails() {
-        return details;
-    }
-
-    public void setDetails(String details) {
-        this.details = details;
-    }
-
-    public LocalDateTime getLoggedAt() {
-        return loggedAt;
-    }
-
-    public void setLoggedAt(LocalDateTime loggedAt) {
-        this.loggedAt = loggedAt;
+    public List<AuditTrailRecord> getAllLogs(){
+        return atrr.findAll();
     }
 }
