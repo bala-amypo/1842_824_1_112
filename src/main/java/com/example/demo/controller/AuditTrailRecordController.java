@@ -19,12 +19,12 @@ public class AuditTrailRecordController {
     }
 
     @GetMapping("/")
-    public int getLogsByCredentials(Long credentialId){
-        return atrs.getLogsByCredential();
+    public int first(Long credentialId){
+        return atrs.getLogs();
     }
 
     @GetMapping
-    public List<AuditTrailRecord> getAllLogs(){
-        return atrs.getAllLogsAuditTrailRecord();
+    public List<AuditTrailRecord> second(){
+        return atrs.getAllLogs();
     }
 }
