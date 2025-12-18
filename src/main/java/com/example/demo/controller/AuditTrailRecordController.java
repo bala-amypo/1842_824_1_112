@@ -15,6 +15,14 @@ public class AuditTrailRecordController {
 
     @PostMapping("/AuditTrail")
     public AuditTrailRecord addAuditTrailRecord(@RequestBody AuditTrailRecord atr){
-        return atrs
+        return atrs.createAuditTrailRecord(atr);
     }
+
+    @GetMapping
+    public int getLogsByCredential(Long credentialId){
+        return atrs.
+    }
+
+    @GetMapping
+    public List<AuditTrailRecord> getAllLogs()
 }
