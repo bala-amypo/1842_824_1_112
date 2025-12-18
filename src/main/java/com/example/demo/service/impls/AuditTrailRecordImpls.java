@@ -15,6 +15,16 @@ public class AuditTrailRecordImpls implements AuditTrailRecordService{
 
     @Override
     public void logEvent(AuditTrailRecord record){
-        auditRepo
+        auditRepo.save(record);
+    }
+
+    @Override
+    public List<AuditTrailRecord> getLogsByCredential(Long credentialId){
+        return auditRepo.findByCredentialId(credentialId);
+    }
+
+    @Override
+    public List<AuditTrailRecord> getAllLogs(){
+        return auditRepo.findAll();
     }
 }
