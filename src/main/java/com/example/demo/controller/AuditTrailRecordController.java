@@ -14,5 +14,7 @@ public class AuditTrailRecordController {
     AuditTrailRecordService atrs;
 
     @PostMapping("/AuditTrail")
-    public AuditTrailRecord addAuditTrailRecord()
+    public AuditTrailRecord addAuditTrailRecord(@RequestBody AuditTrailRecord atr){
+        return atrs
+    }
 }

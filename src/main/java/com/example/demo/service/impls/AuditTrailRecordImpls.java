@@ -11,17 +11,17 @@ import java.util.List;
 public class AuditTrailRecordImpls implements AuditTrailRecordService{
     
     @Autowired
-    AuditTrailRecordRepository atr;
+    AuditTrailRecordRepository atrr;
 
     public AuditTrailRecord logEvent(AuditTrailRecord record){
-        return atr.save(record);
+        return atrr.save(record);
     }
 
     public int getLogsByCredential(Long credentialId){
-        return atr.findById(credentialId);
+        return atrr.findById(credentialId);
     }
 
     public List<AuditTrailRecord> getAllLogs(){
-        return atr.findAll();
+        return atrr.findAll();
     }
 }
