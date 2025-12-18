@@ -20,11 +20,11 @@ public class AuditTrailRecordImpls implements AuditTrailRecordService{
 
     @Override
     public CredentialHolderProfile getHolderById(Long Id){
-        return atrr.findByCredentialId(Id);
+        return chpr.findByHolderId(Id);
     }
 
     @Override
-    public List<AuditTrailRecord> getAllLogs(){
-        return atrr.findAll();
+    public List<CredentialHolderProfile> getAllHolders(){
+        return chpr.findAll();
     }
 }
