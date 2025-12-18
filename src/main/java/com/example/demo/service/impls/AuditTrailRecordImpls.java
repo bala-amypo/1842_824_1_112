@@ -4,6 +4,7 @@ import com.example.demo.service.AuditTrailRecordService;
 import com.example.demo.repository.AuditTrailRecordRepository;
 import com.example.demo.entity.AuditTrailRecord;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 public class AuditTrailRecordImpls implements AuditTrailRecordService{
@@ -15,5 +16,11 @@ public class AuditTrailRecordImpls implements AuditTrailRecordService{
         return atr.save(record);
     }
 
-    public List<AuditTrailRecord> getLogsByCredential(Long credentialId)
+    public List<AuditTrailRecord> getLogsByCredential(Long credentialId){
+        return atr.findByCredentialId(credentialId);
+    }
+
+    public List<AuditTrailRecord> getAllLogs(){
+        return atr.findAll();
+    }
 }
