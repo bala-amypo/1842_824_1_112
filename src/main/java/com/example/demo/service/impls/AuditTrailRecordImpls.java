@@ -5,6 +5,7 @@ import com.example.demo.repository.AuditTrailRecordRepository;
 import com.example.demo.entity.AuditTrailRecord;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import java.lang.Long;
 import java.util.List;
 
 @Service
