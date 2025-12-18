@@ -1,12 +1,12 @@
 package com.example.demo.service;
 
 import java.util.List;
-import com.example.demo.entity.AuditTrailRecord;
+import com.example.demo.entity.CredentialHolderProfile;
 
-public interface CredentialHolderProfile {
+public interface CredentialHolderProfileService {
     CredentialHolderProfile createHolder(CredentialHolderProfile profile);
-    List<AuditTrailRecord> getHolderById(Long id);
-    List<AuditTrailRecord> getAllHolders();
-    List<AuditTrailRecord> findByHolderId(String holderId);
-    List<AuditTrailRecord> updateHolderStatus(Long id, boolean active);
+    List<CredentialHolderProfile> getHolderById(Long id);
+    List<CredentialHolderProfile> getAllHolders();
+    List<CredentialHolderProfile> findByHolderId(String holderId);
+    List<CredentialHolderProfile> updateHolderStatus(Long id, boolean active);
 }
