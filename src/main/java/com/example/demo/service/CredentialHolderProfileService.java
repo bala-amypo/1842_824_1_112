@@ -7,5 +7,6 @@ public interface CredentialHolderProfile {
     CredentialHolderProfile createHolder(CredentialHolderProfile profile);
     List<AuditTrailRecord> getHolderById(Long id);
     List<AuditTrailRecord> getAllHolders();
-    findByHolderId(String holderId);
+    List<AuditTrailRecord> findByHolderId(String holderId);
+    List<AuditTrailRecord> updateHolderStatus(Long id, boolean active);
 }
