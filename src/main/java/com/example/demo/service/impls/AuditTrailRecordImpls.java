@@ -10,18 +10,18 @@ import java.util.List;
 @Service
 public class AuditTrailRecordImpls {
     
-    // @Autowired
-    // AuditTrailRecordRepository atrr;
+    @Autowired
+    AuditTrailRecordRepository atrr;
 
-    // public AuditTrailRecord logEvent(AuditTrailRecord record){
-    //     return atrr.save(record);
-    // }
+    public AuditTrailRecord logEvent(AuditTrailRecord record){
+        return atrr.save(record);
+    }
 
-    // public Long getLogsByCredential(Long credentialId){
-    //     return atrr.findById(credentialId);
-    // }
+    public Long getLogsByCredential(Long credentialId){
+        return atrr.findById(credentialId);
+    }
 
-    // public List<AuditTrailRecord> getAllLogs(){
-    //     return atrr.findAll();
-    // }
+    public List<AuditTrailRecord> getAllLogs(){
+        return atrr.findAll();
+    }
 }
