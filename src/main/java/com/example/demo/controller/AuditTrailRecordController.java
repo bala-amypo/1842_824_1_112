@@ -13,20 +13,20 @@ import java.util.List;
 @RestController
 public class AuditTrailRecordController {
     @Autowired
-    AuditTrailRecordService atrs;
+    private AuditTrailRecordService atrs;
 
-    @PostMapping("/AuditTrail")
+    @PostMapping("/audit")
     public AuditTrailRecord addAuditTrailRecord(@RequestBody AuditTrailRecord atr){
         return atrs.logEvent(atr);
     }
 
     @GetMapping("/{credentialId}")
-    public Long first(Long credentialId){
+    public List<AuditTrailRecord> getByCredential(@PathVariable Long credentialId){
         return atrs.getLogsByCredential(credentialId);
     }
 
     @GetMapping
-    public List<AuditTrailRecord> second(){
+    public List<AuditTrailRecord> getAll(){
         return atrs.getAllLogs();
     }
 }
