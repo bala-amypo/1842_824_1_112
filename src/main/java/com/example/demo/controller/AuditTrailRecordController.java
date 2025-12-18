@@ -20,7 +20,7 @@ public class AuditTrailRecordController {
         return atrs.logEvent(atr);
     }
 
-    @GetMapping("/")
+    @GetMapping("/{credentialId}")
     public Long first(Long credentialId){
         return atrs.getLogsByCredential(credentialId);
     }
