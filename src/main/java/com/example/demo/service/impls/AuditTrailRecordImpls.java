@@ -17,8 +17,8 @@ public class AuditTrailRecordImpls {
         return atrr.save(record);
     }
 
-    public Long getLogsByCredential(Long credentialId){
-        return atrr.findById(credentialId);
+    public List<AuditTrailRecord> getLogsByCredential(Long credentialId){
+        return atrr.findByCredentialId(credentialId);
     }
 
     public List<AuditTrailRecord> getAllLogs(){
