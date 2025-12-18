@@ -17,7 +17,7 @@ public class CredentialHolderProfileController {
     private CredentialHolderProfileService chps;
 
     @PostMapping("/audit")
-    public CredentialHolderProfile addCredentialHolderProfile(@RequestBody CredentialHolderProfile chp){
+    public CredentialHolderProfile createHolder(@RequestBody CredentialHolderProfile chp){
         return chps.createHolder(chp);
     }
 
