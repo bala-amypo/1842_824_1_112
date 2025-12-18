@@ -30,7 +30,7 @@ public class CredentialHolderProfileController {
     }
 
     @GetMapping
-    public List<CredentialHolderProfile> getAllHolders(){
+    public CredentialHolderProfile getAllHolders(){
         return chps.getAllHolders();
     }
 
