@@ -2,10 +2,11 @@ package com.example.demo.service.impls;
 
 import com.example.demo.service.AuditTrailRecordService;
 import com.example.demo.repository.AuditTrailRecordRepository;
-import org.springframework.stereotype.service;
+import com.example.demo.entity.AuditTrailRecord;
+import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
-
 public class AuditTrailRecordImpls implements AuditTrailRecordService{
     private final AuditTrailRecordRepository auditRepo;
 

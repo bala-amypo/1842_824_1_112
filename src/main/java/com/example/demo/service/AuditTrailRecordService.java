@@ -1,10 +1,10 @@
 package com.example.demo.service;
 
-import org.springframework.stereotype.Service;
-
-
-@Service
+import java.util.List;
+import com.example.demo.entity.AuditTrailRecord;
 public interface AuditTrailRecordService {
     
-    
+    void logEvent( AuditTrailRecord record);
+    List<AuditTrailRecord> getLogsByCredential(Long credentialId);
+    List<AuditTrailRecord> getAllLogs();
 }
