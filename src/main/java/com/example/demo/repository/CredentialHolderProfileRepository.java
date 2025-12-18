@@ -7,5 +7,5 @@ import com.example.demo.entity.CredentialHolderProfile;
 
 @Repository
 public interface CredentialHolderProfileRepository extends JpaRepository<CredentialHolderProfile, Long>{
-
+    CredentialHolderProfile findByHolderId(String holderId);
 }
