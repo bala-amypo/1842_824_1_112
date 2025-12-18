@@ -26,7 +26,7 @@ public class CredentialHolderProfileController {
 
     @GetMapping("/{id}")
     public CredentialHolderProfile getHolderById(@PathVariable Long id){
-        return chps.getByHolderId(id);
+        return chps.getHolderById(id);
     }
 
     @GetMapping
