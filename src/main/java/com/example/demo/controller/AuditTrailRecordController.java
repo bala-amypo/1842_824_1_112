@@ -10,5 +10,10 @@ import com.example.demo.service.AuditTrailRecordService;
 
 @RestController
 public class AuditTrailRecordController {
+    private final AuditTrailRecordService auditTrailRecordService;
 
+    public AuditTrailRecordController(AuditTrailRecordService auditTrailRecordService){
+        this.auditTrailRecordService=auditTrailRecordService;
+    }
+    
 }
