@@ -5,5 +5,7 @@ import com.example.demo.entity.AuditTrailRecord;
 
 public interface CredentialHolderProfile {
     CredentialHolderProfile createHolder(CredentialHolderProfile profile);
-    getHolderById(Long id);
+    List<AuditTrailRecord> getHolderById(Long id);
+    List<AuditTrailRecord> getAllHolders();
+    findByHolderId(String holderId);
 }
