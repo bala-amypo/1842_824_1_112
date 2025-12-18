@@ -10,4 +10,10 @@ public class AuditTrailRecordImpls implements AuditTrailRecordService{
     
     @Autowired
     AuditTrailRecordRepository atr;
+
+    public AuditTrailRecord logEvent(AuditTrailRecord record){
+        return atr.save(record);
+    }
+
+    public List<AuditTrailRecord> getLogsByCredential(Long credentialId)
 }
