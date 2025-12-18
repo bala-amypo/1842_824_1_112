@@ -19,7 +19,7 @@ public class CredentialHolderProfileController {
     @Autowired
     private CredentialHolderProfileService chps;
 
-    @PostMapping("/audit")
+    @PostMapping("/holders")
     public CredentialHolderProfile createHolder(@RequestBody CredentialHolderProfile chp){
         return chps.createHolder(chp);
     }
@@ -34,7 +34,7 @@ public class CredentialHolderProfileController {
         return chps.getAllHolders();
     }
 
-    @PutMapping
+    @PutMapping{"/{id}/status"}
     public CredentialHolderProfile updateHolderStatus(@PathVariable Long id, @RequestParam boolean active){
         return chps.updateHolderStatus(id, active);
     }
