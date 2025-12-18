@@ -8,19 +8,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Service
-public class AuditTrailRecordImpls {
+public class AuditTrailRecordImpls implements AuditTrailRecordService{
     
     @Autowired
-    AuditTrailRecordRepository atrr;
+    private AuditTrailRecordRepository atrr;
 
+    @Override
     public AuditTrailRecord logEvent(AuditTrailRecord record){
         return atrr.save(record);
     }
 
+    @Override
     public List<AuditTrailRecord> getLogsByCredential(Long credentialId){
         return atrr.findByCredentialId(credentialId);
     }
 
+    @Override
     public List<AuditTrailRecord> getAllLogs(){
         return atrr.findAll();
     }
