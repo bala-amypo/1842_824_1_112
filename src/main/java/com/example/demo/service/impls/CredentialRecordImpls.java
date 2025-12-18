@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Service
-public class AuditTrailRecordImpls implements AuditTrailRecordService{
+public class CredentialHolderProfileImpls implements CredentialHolderProfileService{
     
     @Autowired
     private CredentialHolderProfileRepository chpr;
