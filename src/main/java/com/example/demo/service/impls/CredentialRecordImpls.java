@@ -1,8 +1,8 @@
 package com.example.demo.service.impls;
 
-import com.example.demo.service.AuditTrailRecordService;
-import com.example.demo.repository.AuditTrailRecordRepository;
-import com.example.demo.entity.AuditTrailRecord;
+import com.example.demo.service.CredentialHolderProfileService;
+import com.example.demo.repository.CredentialHolderProfileRepository;
+import com.example.demo.entity.CredentialHolderProfile;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
@@ -11,16 +11,16 @@ import java.util.List;
 public class AuditTrailRecordImpls implements AuditTrailRecordService{
     
     @Autowired
-    private AuditTrailRecordRepository atrr;
+    private CredentialHolderProfileRepository chpr;
 
     @Override
-    public AuditTrailRecord logEvent(AuditTrailRecord record){
-        return atrr.save(record);
+    public CredentialHolderProfile createHolder(CredentialHolderProfile profile){
+        return chpr.save(profile);
     }
 
     @Override
-    public List<AuditTrailRecord> getLogsByCredential(Long credentialId){
-        return atrr.findByCredentialId(credentialId);
+    public CredentialHolderProfile getHolderById(Long Id){
+        return atrr.findByCredentialId(Id);
     }
 
     @Override
