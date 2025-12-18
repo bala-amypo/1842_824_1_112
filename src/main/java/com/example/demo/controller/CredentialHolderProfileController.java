@@ -32,5 +32,7 @@ public class CredentialHolderProfileController {
     }
 
     @PutMapping
-    public CredentialHolderProfile updateHolderStatus(@PathVariable Long id, @RequestParam boolean active)
+    public CredentialHolderProfile updateHolderStatus(@PathVariable Long id, @RequestParam boolean active){
+        return chps.updateHolderStatus(id, active);
+    }
 }
