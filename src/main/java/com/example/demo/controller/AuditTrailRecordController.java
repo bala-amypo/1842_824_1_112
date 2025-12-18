@@ -10,5 +10,6 @@ import com.example.demo.service.AuditTrailRecordService;
 
 @RestController
 public class AuditTrailRecordController {
+    @Autowired
     
 }
