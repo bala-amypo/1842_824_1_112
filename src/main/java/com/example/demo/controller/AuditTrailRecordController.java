@@ -14,5 +14,5 @@ public class AuditTrailRecordController {
     AuditTrailRecordService atrs;
 
     @PostMapping("/AuditTrail")
-    public
+    public AuditTrailRecord addAuditTrailRecord()
 }
