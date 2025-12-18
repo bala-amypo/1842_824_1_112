@@ -17,7 +17,7 @@ public class AuditTrailRecordImpls implements AuditTrailRecordService{
         return atr.save(record);
     }
 
-    public List<AuditTrailRecord> getLogsByCredential(Long credentialId){
+    public int getLogsByCredential(Long credentialId){
         return atr.findById(credentialId);
     }
 
