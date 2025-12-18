@@ -29,12 +29,12 @@ public class AuditTrailRecordImpls implements AuditTrailRecordService{
     }
 
     @Override
-    public CredentialHolderProfile gethId(String holderId){
+    public CredentialHolderProfile getHId(String holderId){
         return chpr.findByHolderId(holderId);
     }
 
     @Override
-    public CredentialHolderProfile gethId(String holderId){
-        return chpr.findByHolderId(holderId);
+    public CredentialHolderProfile getHolderStatus(Long id, boolean active){
+        return chpr.updateHolderStatus(id, active);
     }
 }
