@@ -18,12 +18,12 @@ public class CredentialHolderProfileController {
 
     @PostMapping("/audit")
     public CredentialHolderProfile addCredentialHolderProfile(@RequestBody CredentialHolderProfile chp){
-        return chps.logEvent(chp);
+        return chps.createHolder(chp);
     }
 
-    @GetMapping("/{credentialId}")
-    public List<AuditTrailRecord> getByCredential(@PathVariable Long credentialId){
-        return atrs.getLogsByCredential(credentialId);
+    @GetMapping("/{id}")
+    public CredentialHolderProfile getHolderById(@PathVariable Long id){
+        return chps.getByHolderId(id);
     }
 
     @GetMapping
