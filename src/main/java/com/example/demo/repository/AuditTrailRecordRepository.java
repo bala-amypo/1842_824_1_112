@@ -7,5 +7,5 @@ import com.example.demo.entity.AuditTrailRecord;
 
 @Repository
 public interface AuditTrailRecordRepository extends JpaRepository<AuditTrailRecord, Long>{
-
+    List<AuditTrailRecord> findByCredentialId(Long credentialId);
 }
