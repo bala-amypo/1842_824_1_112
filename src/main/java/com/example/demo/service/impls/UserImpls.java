@@ -1,7 +1,7 @@
 package com.example.demo.service.impls;
 
 import com.example.demo.service.UserService;
-import com.example.demo.repository.CredentialRecordRepository;
+import com.example.demo.repository.UserRepository;
 import com.example.demo.entity.User;
 
 import org.springframework.stereotype.Service;
@@ -10,13 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Service
-public class CredentialRecordImpls implements CredentialRecordService {
+public class UserImpls implements UserService {
 
     @Autowired
-    private CredentialRecordRepository crr;
+    private UserRepository ur;
 
     @Override
-    public CredentialRecord createCredential(CredentialRecord record) {
+    public User createCredential(User record) {
         if (record.getStatus() == null) {
             record.setStatus("VALID");
         }
