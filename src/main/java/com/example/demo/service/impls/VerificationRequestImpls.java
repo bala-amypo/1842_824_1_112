@@ -16,33 +16,17 @@ public class VerificationRequestImpls implements VerificationRequestervice {
     private VerificationRequestRepository vrr;
 
     @Override
-    public initiateVerification(VerificationRequest request){
+    public VerificationRequest(VerificationRequest request){
         return vrr.save(request);
     }
 
     @Override
-    public CredentialRecord updateCredential(Long id, CredentialRecord updated) {
-        CredentialRecord existing = crr.findById(id).orElseThrow(() ->new RuntimeException("Credential not found"));
-
-        existing.setCredentialCode(updated.getCredentialCode());
-        existing.setHolderId(updated.getHolderId());
-        existing.setStatus(updated.getStatus());
-
-        return crr.save(existing);
-    }
-
-    @Override
-    public List<CredentialRecord> getCredentialsByHolder(Long holderId) {
+    public List<> VerificationRequest(Long holderId) {
         return crr.findByHolderId(holderId);
     }
 
     @Override
     public CredentialRecord getCredentialByCode(String code) {
         return crr.findByCredentialCode(code);
-    }
-
-    @Override
-    public List<CredentialRecord> getAllCredentials() {
-        return crr.findAll();
     }
 }
