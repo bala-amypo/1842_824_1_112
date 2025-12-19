@@ -22,7 +22,7 @@ public class VerificationRequestImpls implements VerificationRequestervice {
 
     @Override
     public VerificationRequest processVerification(Long requestId){
-        return vrr.save(request);
+        return vrr.findby(request);
     }
 
     @Override
