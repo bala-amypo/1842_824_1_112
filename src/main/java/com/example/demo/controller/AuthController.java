@@ -23,7 +23,7 @@ public class AuthController {
         return us.registerUser(user);
     }
 
-    @GetMapping("/login")
+    @GetMapping("/login/{email}")
     public List<User> findByEmail(@PathVariable String email){
         return us.findByEmail(email);
     }

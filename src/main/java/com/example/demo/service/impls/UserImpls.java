@@ -22,7 +22,7 @@ public class UserImpls implements UserService {
     }
 
     @Override
-    List<User> findByEmail(String email){
+    public List<User> findByEmail(String email){
     return ur.findByEmail(email);
     }
 }
