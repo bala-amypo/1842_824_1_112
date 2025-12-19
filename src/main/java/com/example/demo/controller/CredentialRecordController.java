@@ -31,8 +31,7 @@ public class CredentialRecordController {
     }
 
     @GetMapping("/code/{credentialCode}")
-    public CredentialRecord getCredentialByCode(
-            @PathVariable String credentialCode) {
+    public CredentialRecord getCredentialByCode(@PathVariable String credentialCode) {
         return credentialService.getCredentialByCode(credentialCode);
     }
 
