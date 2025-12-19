@@ -16,11 +16,11 @@ import java.util.List;
 @RequestMapping("/api/rules")
 public class VerificationRuleController {
     @Autowired
-    private VerificationRuleService atrs;
+    private VerificationRuleService vrs;
 
     @PostMapping
-    public VerificationRule addAuditTrailRecord(@RequestBody VerificationRule atr){
-        return atrs.logEvent(atr);
+    public VerificationRule addAuditTrailRecord(@RequestBody VerificationRule vr){
+        return vrs.logEvent(vr);
     }
 
     @GetMapping("/{credentialId}")
