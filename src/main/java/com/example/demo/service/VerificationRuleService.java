@@ -5,5 +5,7 @@ import com.example.demo.entity.VerificationRule;
 
 public interface VerificationRuleService {
     createRule(VerificationRule rule);
-    updateRule(Long id, )
+    updateRule(Long id, VerificationRule updatedRule);
+    getActiveRules();
+    getAllRules();
 }
