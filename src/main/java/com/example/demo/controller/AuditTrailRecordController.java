@@ -12,11 +12,12 @@ import com.example.demo.service.AuditTrailRecordService;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/audit")
 public class AuditTrailRecordController {
     @Autowired
     private AuditTrailRecordService atrs;
 
-    @PostMapping("/audit")
+    @PostMapping
     public AuditTrailRecord addAuditTrailRecord(@RequestBody AuditTrailRecord atr){
         return atrs.logEvent(atr);
     }
