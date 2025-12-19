@@ -13,7 +13,7 @@ import java.util.List;
 public class VerificationRuleImpls implements VerificationRuleService {
 
     @Autowired
-    private VerificationRequestRepository vrr;
+    private VerificationRuleRepository vrr;
 
     @Override
     public VerificationRule createRule(VerificationRule rule) {
