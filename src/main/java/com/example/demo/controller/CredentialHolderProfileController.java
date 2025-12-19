@@ -21,14 +21,12 @@ public class CredentialHolderProfileController {
     private CredentialHolderProfileService chps;
 
     @PostMapping("/holders")
-    public CredentialHolderProfile createHolder(
-            @RequestBody CredentialHolderProfile chp) {
+    public CredentialHolderProfile createHolder(@RequestBody CredentialHolderProfile chp) {
         return chps.createHolder(chp);
     }
 
     @GetMapping("/holders/{id}")
-    public CredentialHolderProfile getHolderById(
-            @PathVariable Long id) {
+    public CredentialHolderProfile getHolderById(@PathVariable Long id) {
         return chps.getHolderById(id);
     }
 
@@ -38,9 +36,7 @@ public class CredentialHolderProfileController {
     }
 
     @PutMapping("/holders/{id}/status")
-    public CredentialHolderProfile updateHolderStatus(
-            @PathVariable Long id,
-            @RequestParam boolean active) {
+    public CredentialHolderProfile updateHolderStatus(@PathVariable Long id, @RequestParam boolean active) {
         return chps.updateHolderStatus(id, active);
     }
 }

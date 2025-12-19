@@ -36,7 +36,7 @@ public class VerificationRuleImpls implements VerificationRuleService {
 
     @Override
     public List<VerificationRule> getActiverules() {
-        return vrr.findByActiverule();
+        return vrr.findByActiverules();
     }
 
     @Override
