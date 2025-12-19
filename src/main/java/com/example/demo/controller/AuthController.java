@@ -16,20 +16,15 @@ import java.util.List;
 @RequestMapping("/api/audit")
 public class AuthController {
     @Autowired
-    private UserService atrs;
+    private UserService us;
 
     @PostMapping
-    public User registerUser(User user) (@RequestBody AuditTrailRecord atr){
-        return atrs.logEvent(atr);
+    public User registerUser(@RequestBody User user) {
+        return us.registerUser(user);
     }
 
-    @GetMapping("/{credentialId}")
-    public List<AuditTrailRecord> getByCredential(@PathVariable Long credentialId){
-        return atrs.getLogsByCredential(credentialId);
-    }
-
-    @GetMapping
-    public List<AuditTrailRecord> getAll(){
-        return atrs.getAllLogs();
+    @GetMapping("/login")
+    public List<User> findByEmail(@PathVariable String Email){
+        return atrs.findByEmail(credentialId);
     }
 }
