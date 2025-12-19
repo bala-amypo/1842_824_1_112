@@ -13,39 +13,34 @@ import java.util.List;
 public class VerificationRuleImpls implements VerificationRuleService {
 
     @Autowired
-    private VerificationRuleRepository crr;
+    private VerificationRuleRepository vrr;
 
     @Override
     public VerificationRule createRule(VerificationRule rule) {
         if (record.getStatus() == null) {
             record.setStatus("VALID");
         }
-        return crr.save(rule);
+        return vrr.save(rule);
     }
 
     @Override
-    public VerificationRule updateCredential(Long id, CredentialRecord updated) {
-        VerificationRule existing = crr.findById(id).orElseThrow(() ->new RuntimeException("Credential not found"));
+    public VerificationRule updateRule(Long id, VerificationRule updatedRule) {
+        VerificationRule existing = vrr.findById(id).orElseThrow(() ->new RuntimeException("Credential not found"));
 
         existing.setCredentialCode(updated.getCredentialCode());
         existing.setHolderId(updated.getHolderId());
         existing.setStatus(updated.getStatus());
 
-        return crr.save(existing);
+        return vrr.save(existing);
     }
 
     @Override
-    public List<CredentialRecord> getCredentialsByHolder(Long holderId) {
-        return crr.findByHolderId(holderId);
+    public List<VerificationRule> getActiverules() {
+        return vrr.findByActiverule();
     }
 
     @Override
-    public CredentialRecord getCredentialByCode(String code) {
-        return crr.findByCredentialCode(code);
-    }
-
-    @Override
-    public List<CredentialRecord> getAllCredentials() {
-        return crr.findAll();
+    public List<VerificationRule> getAllRules() {
+        return vrr.findAll();
     }
 }
