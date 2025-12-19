@@ -1,6 +1,6 @@
 package com.example.demo.service.impls;
 
-import com.example.demo.service.Service;
+import com.example.demo.service.CredentialRecordService;
 import com.example.demo.repository.CredentialRecordRepository;
 import com.example.demo.entity.CredentialRecord;
 
@@ -16,36 +16,38 @@ public class CredentialRecordImpls implements CredentialRecordService {
     private CredentialRecordRepository crr;
 
     @Override
-    public CredentialRecord createHolder(CredentialRecord record) {
+    public CredentialRecord createCredential(CredentialRecord record) {
+        if (record.getStatus() == null) {
+            record.setStatus("VALID");
+        }
         return crr.save(record);
     }
 
     @Override
-    public CredentialRecord getHolderById(Long id, CredentialRecord) {
-        return crr.findById(id)
+    public CredentialRecord updateCredential(Long id, CredentialRecord updated) {
+        CredentialRecord existing = crr.findById(id)
                 .orElseThrow(() ->
-                        new RuntimeException("Holder not found"));
+                        new RuntimeException("Credential not found"));
+
+        existing.setCredentialCode(updated.getCredentialCode());
+        existing.setHolderId(updated.getHolderId());
+        existing.setStatus(updated.getStatus());
+
+        return crr.save(existing);
     }
 
     @Override
-    public List<CredentialHolderProfile> getAllHolders() {
-        return chpr.findAll();
+    public List<CredentialRecord> getCredentialsByHolder(Long holderId) {
+        return crr.findByHolderId(holderId);
     }
 
     @Override
-    public CredentialHolderProfile findByHolderId(String holderId) {
-        return chpr.findByHolderId(holderId);
+    public CredentialRecord getCredentialByCode(String code) {
+        return crr.findByCredentialCode(code);
     }
 
     @Override
-    public CredentialHolderProfile updateHolderStatus(
-            Long id, boolean active) {
-
-        CredentialHolderProfile holder = chpr.findById(id)
-                .orElseThrow(() ->
-                        new RuntimeException("Holder not found"));
-
-        holder.setActive(active);
-        return chpr.save(holder);
+    public List<CredentialRecord> getAllCredentials() {
+        return crr.findAll();
     }
 }
