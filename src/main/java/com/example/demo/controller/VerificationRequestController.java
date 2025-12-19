@@ -13,23 +13,28 @@ import com.example.demo.service.VerificationRequestService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/rules")
+@RequestMapping("/api/verification")
 public class VerificationRequestController {
 
     @Autowired
     private VerificationRequestService vrss;
 
     @PostMapping
-    public VerificationRequest (@RequestBody VerificationRule rule) {
+    public VerificationRequest initiateVerification(@RequestBody VerificationRule rule) {
         return vrs.createRule(rule);
     }
 
-    @PutMapping("/{id}")
-    public VerificationRule updateRule( @PathVariable Long id,@RequestBody VerificationRule rule) {
+    @PutMapping("/{id}/process")
+    public VerificationRule processVerification( @PathVariable Long id,@RequestBody VerificationRule rule) {
         return vrs.updateRule(id, rule);
     }
 
-    @GetMapping("/active")
+    @GetMapping("/credential/{credentialId}")
+    public List<VerificationRule> getActiveRules() {
+        return vrs.getActiveRules();
+    }
+
+    @GetMapping("/{Id}")
     public List<VerificationRule> getActiveRules() {
         return vrs.getActiveRules();
     }
@@ -38,8 +43,5 @@ public class VerificationRequestController {
     public List<VerificationRule> getAllRules() {
         return vrs.getAllRules();
     }
-    @GetMapping
-    public List<VerificationRule> getAllRules() {
-        return vrs.getAllRules();
-    }
+
 }
