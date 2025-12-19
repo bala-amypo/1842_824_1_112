@@ -16,9 +16,10 @@ public class UserImpls implements UserService {
     private UserRepository ur;
 
     @Override
-    public User createCredential(User record) {
-        if (record.getStatus() == null) {
-            record.setStatus("VALID");
-        }
-        return crr.save(record);
+    public User registerUser(User user) {
+        return ur.save(user);
     }
+
+    @Override
+    List<User> findByEmail(String email){
+    return ur.findByEmail()
