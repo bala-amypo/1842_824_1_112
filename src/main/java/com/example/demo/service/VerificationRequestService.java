@@ -5,7 +5,7 @@ import com.example.demo.entity.VerificationRequest;
 
 public interface VerificationRequestService {
     
-    VerificationRequest logEvent(VerificationRequest record);
+    VerificationRequest logEvent(VerificationRequest request);
     List<VerificationRequest> getLogsByCredential(Long credentialId);
     List<VerificationRequest> getAllLogs();
 }
