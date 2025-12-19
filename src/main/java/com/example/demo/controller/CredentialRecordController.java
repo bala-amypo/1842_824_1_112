@@ -9,13 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/credentials")
 public class CredentialRecordController {
 
     @Autowired
     private CredentialRecordService credentialService;
 
-    @PostMapping
+    @PostMapping("/api/credentials")
     public CredentialRecord createCredential(@RequestBody CredentialRecord record) {
         return credentialService.createCredential(record);
     }

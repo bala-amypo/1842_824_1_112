@@ -4,11 +4,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.entity.CredentialRecord;
+import java.util.List;
 
 @Repository
 public interface CredentialRecordRepository extends JpaRepository<CredentialRecord, Long>{
     List<CredentialRecord> findByHolderId(Long holderId);
 
-    // For GET /code/{credentialCode}
     CredentialRecord findByCredentialCode(String credentialCode);
 }
