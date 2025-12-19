@@ -21,12 +21,12 @@ public class VerificationRequestImpls implements VerificationRequestervice {
     }
 
     @Override
-    public List<> VerificationRequest(Long holderId) {
-        return crr.findByHolderId(holderId);
+    public List<VerificationRequest> getActiverules() {
+        return vrr.findByActiverules();
     }
 
     @Override
-    public CredentialRecord getCredentialByCode(String code) {
-        return crr.findByCredentialCode(code);
+    public List<VerificationRequest> getAllRules() {
+        return crr.findById();
     }
 }
