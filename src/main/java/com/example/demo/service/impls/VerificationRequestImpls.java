@@ -1,7 +1,7 @@
 package com.example.demo.service.impls;
 
-import com.example.demo.service.CredentialRecordService;
-import com.example.demo.repository.CredentialRecordRepository;
+import com.example.demo.service.VerificationRequestService;
+import com.example.demo.repository.VerificationRequestRepository;
 import com.example.demo.entity.VerificationRequest;
 
 import org.springframework.stereotype.Service;
@@ -10,17 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Service
-public class CredentialRecordImpls implements CredentialRecordService {
+public class VerificationRequestImpls implements VerificationRequestervice {
 
     @Autowired
-    private CredentialRecordRepository crr;
+    private VerificationRequestRepository vrr;
 
     @Override
-    public CredentialRecord createCredential(CredentialRecord record) {
-        if (record.getStatus() == null) {
-            record.setStatus("VALID");
-        }
-        return crr.save(record);
+    public initiateVerification(VerificationRequest request){
+        return vrr.save(request);
     }
 
     @Override
