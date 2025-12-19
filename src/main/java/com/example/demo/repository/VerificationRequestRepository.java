@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.entity.VerificationRequest;
 import java.util.List;
+import java.lang.Long;
 
 @Repository
 public interface VerificationRequestRepository extends JpaRepository<VerificationRequest, Long>{
