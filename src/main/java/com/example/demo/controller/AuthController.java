@@ -13,7 +13,7 @@ import com.example.demo.service.UserService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/audit")
+@RequestMapping("/auth")
 public class AuthController {
     @Autowired
     private UserService us;
@@ -24,7 +24,7 @@ public class AuthController {
     }
 
     @GetMapping("/login")
-    public List<User> findByEmail(@PathVariable String Email){
-        return atrs.findByEmail(credentialId);
+    public List<User> findByEmail(@PathVariable String email){
+        return us.findByEmail(email);
     }
 }
