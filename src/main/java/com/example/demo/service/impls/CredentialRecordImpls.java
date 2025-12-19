@@ -25,9 +25,7 @@ public class CredentialRecordImpls implements CredentialRecordService {
 
     @Override
     public CredentialRecord updateCredential(Long id, CredentialRecord updated) {
-        CredentialRecord existing = crr.findById(id)
-                .orElseThrow(() ->
-                        new RuntimeException("Credential not found"));
+        CredentialRecord existing = crr.findById(id).orElseThrow(() ->new RuntimeException("Credential not found"));
 
         existing.setCredentialCode(updated.getCredentialCode());
         existing.setHolderId(updated.getHolderId());
