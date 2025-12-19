@@ -17,30 +17,32 @@ import java.util.List;
 public class VerificationRequestController {
 
     @Autowired
-    private VerificationRequestService vrss;
+    private VerificationRequestService vrs;
 
     @PostMapping
-    public VerificationRequest initiateVerification(@RequestBody VerificationRule rule) {
-        return vrs.createRule(rule);
+    public VerificationRequest initiateVerification(
+            @RequestBody VerificationRequest request) {
+        return vrs.initiateVerification(request);
     }
 
     @PutMapping("/{id}/process")
-    public VerificationRule processVerification( @PathVariable Long id,@RequestBody VerificationRule rule) {
-        return vrs.updateRule(id, rule);
+    public VerificationRequest processVerification(@PathVariable Long id) {
+        return vrs.processVerification(id);
     }
 
     @GetMapping("/credential/{credentialId}")
-    public List<VerificationRule> getActiveRules() {
-        return vrs.getActiveRules();
-    }
-
-    @GetMapping("/{Id}")
-    public List<VerificationRule> getActiveRules() {
-        return vrs.getActiveRules();
+    public List<VerificationRequest> getByCredential(
+            @PathVariable Long credentialId) {
+        return vrs.getRequestsByCredential(credentialId);
     }
 
     @GetMapping
-    public List<VerificationRule> getAllRules() {
-        return vrs.getAllRules();
+    public List<VerificationRequest> getAllRequests() {
+        return vrs.getAllRequests();
+    }
+
+    @GetMapping("/{id}")
+    public VerificationRequest getById(@PathVariable Long id) {
+        return vrs.processVerification(id);
     }
 }
