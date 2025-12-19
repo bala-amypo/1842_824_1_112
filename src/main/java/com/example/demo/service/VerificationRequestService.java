@@ -5,6 +5,7 @@ import com.example.demo.entity.VerificationRequest;
 
 public interface VerificationRequestService {
     VerificationRequest initiateVerification(VerificationRequest request );
+    VerificationRequest processVerification(Long requestID);
     List<VerificationRequest> getRequestsByCredential(Long credentialId);
     List<VerificationRequest> getAllRequests();
 }
