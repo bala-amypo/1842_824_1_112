@@ -20,7 +20,7 @@ public class VerificationRequestController {
     private VerificationRequestService vrss;
 
     @PostMapping
-    public VerificationRule (@RequestBody VerificationRule rule) {
+    public VerificationRequest (@RequestBody VerificationRule rule) {
         return vrs.createRule(rule);
     }
 
