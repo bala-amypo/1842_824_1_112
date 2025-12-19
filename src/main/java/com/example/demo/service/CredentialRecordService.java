@@ -4,9 +4,9 @@ import java.util.List;
 import com.example.demo.entity.CredentialRecord;
 
 public interface CredentialRecordService{
-    createCredential(CredentialRecord record);
-    updateCredential(Long id, CredentialRecord updated);
-    getCredentialsByHolder(Long holderId);
-    getCredentialByCode(String code);
-    getAllCredentials();
+    CredentialRecord createCredential(CredentialRecord record);
+    CredentialRecord updateCredential(Long id, CredentialRecord updated);
+    List<CredentialRecord> getCredentialsByHolder(Long holderId);
+    CredentialRecord getCredentialByCode(String code);
+    List<CredentialRecord> getAllCredentials();
 }
