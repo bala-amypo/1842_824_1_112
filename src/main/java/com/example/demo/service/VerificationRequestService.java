@@ -4,7 +4,7 @@ import java.util.List;
 import com.example.demo.entity.VerificationRequest;
 
 public interface VerificationRequestService {
-    VerificationRequest logEvent(VerificationRequest req uest );
+    VerificationRequest initiateVerification(VerificationRequest request );
     List<VerificationRequest> getRequestsByCredential(Long credentialId);
-    List<VerificationRequest> getAllLogs();
+    List<VerificationRequest> getAllRequests();
 }
