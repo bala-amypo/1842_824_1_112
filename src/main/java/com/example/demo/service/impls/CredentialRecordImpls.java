@@ -13,17 +13,16 @@ import java.util.List;
 public class CredentialRecordImpls implements CredentialRecordService {
 
     @Autowired
-    private Repository chpr;
+    private CredentialRecordRepository crr;
 
     @Override
-    public CredentialHolderProfile createHolder(
-            CredentialHolderProfile profile) {
-        return chpr.save(profile);
+    public CredentialRecord createHolder(CredentialRecord record) {
+        return crr.save(record);
     }
 
     @Override
-    public CredentialHolderProfile getHolderById(Long id) {
-        return chpr.findById(id)
+    public CredentialRecord getHolderById(Long id, CredentialRecord) {
+        return crr.findById(id)
                 .orElseThrow(() ->
                         new RuntimeException("Holder not found"));
     }
