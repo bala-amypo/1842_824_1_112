@@ -43,5 +43,4 @@ public class VerificationRequestController {
     public List<VerificationRule> getAllRules() {
         return vrs.getAllRules();
     }
-
 }
