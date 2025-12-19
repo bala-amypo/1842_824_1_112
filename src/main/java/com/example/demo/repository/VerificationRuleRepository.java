@@ -7,5 +7,5 @@ import com.example.demo.entity.VerificationRule;
 
 @Repository
 public interface VerificationRuleRepository extends JpaRepository<VerificationRule, Long>{
-
+    List<VerificationRule> findByActiveTrue();
 }
