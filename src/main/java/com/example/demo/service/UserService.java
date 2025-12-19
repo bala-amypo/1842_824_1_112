@@ -6,6 +6,6 @@ import com.example.demo.entity.User;
 public interface UserService {
     
     User registerUser(User user);
-    List<User> getLogsByCredential(Long credentialId);
+    List<User> findByEmail(String credentialId);
     List<AuditTrailRecord> getAllLogs();
 }
