@@ -10,22 +10,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Service
-public class CredentialRecordImpls implements CredentialRecordService {
+public class VerificationRuleImpls implements VerificationRuleService {
 
     @Autowired
-    private CredentialRecordRepository crr;
+    private VerificationRuleRepository crr;
 
     @Override
-    public CredentialRecord createCredential(CredentialRecord record) {
+    public VerificationRule createRule(VerificationRule rule) {
         if (record.getStatus() == null) {
             record.setStatus("VALID");
         }
-        return crr.save(record);
+        return crr.save(rule);
     }
 
     @Override
-    public CredentialRecord updateCredential(Long id, CredentialRecord updated) {
-        CredentialRecord existing = crr.findById(id).orElseThrow(() ->new RuntimeException("Credential not found"));
+    public VerificationRule updateCredential(Long id, CredentialRecord updated) {
+        VerificationRule existing = crr.findById(id).orElseThrow(() ->new RuntimeException("Credential not found"));
 
         existing.setCredentialCode(updated.getCredentialCode());
         existing.setHolderId(updated.getHolderId());
