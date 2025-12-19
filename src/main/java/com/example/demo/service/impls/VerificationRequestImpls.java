@@ -16,7 +16,12 @@ public class VerificationRequestImpls implements VerificationRequestervice {
     private VerificationRequestRepository vrr;
 
     @Override
-    public VerificationRequest(VerificationRequest request){
+    public VerificationRequest initiateVerification(VerificationRequest request){
+        return vrr.save(request);
+    }
+
+    @Override
+    public VerificationRequest processVerification(Long requestId){
         return vrr.save(request);
     }
 
