@@ -17,26 +17,29 @@ public class VerificationRuleImpls implements VerificationRuleService {
 
     @Override
     public VerificationRule createRule(VerificationRule rule) {
-        if (record.getStatus() == null) {
-            record.setStatus("VALID");
+        if (rule.getActive() == null) {
+            rule.setActive(true);
         }
         return vrr.save(rule);
     }
 
     @Override
     public VerificationRule updateRule(Long id, VerificationRule updatedRule) {
-        VerificationRule existing = vrr.findById(id).orElseThrow(() ->new RuntimeException("Credential not found"));
+        VerificationRule existing = vrr.findById(id)
+            .orElseThrow(() -> new RuntimeException("VerificationRule not found"));
 
-        existing.setCredentialCode(updated.getCredentialCode());
-        existing.setHolderId(updated.getHolderId());
-        existing.setStatus(updated.getStatus());
+        existing.setRuleCode(updatedRule.getRuleCode());
+        existing.setDescription(updatedRule.getDescription());
+        existing.setAppliesToType(updatedRule.getAppliesToType());
+        existing.setValidationExpression(updatedRule.getValidationExpression());
+        existing.setActive(updatedRule.getActive());
 
         return vrr.save(existing);
     }
 
     @Override
-    public List<VerificationRule> getActiverules() {
-        return vrr.findByActiverules();
+    public List<VerificationRule> getActiveRules() {
+        return vrr.findByActiveTrue();
     }
 
     @Override
