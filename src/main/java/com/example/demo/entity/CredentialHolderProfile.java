@@ -20,6 +20,7 @@ public class CredentialHolderProfile{
     private String organization;
     @Column(nullable=false)
     private Boolean active=true;
+    @Column(updatable=false)
     private LocalDateTime createdAt;
 
     public Long getId(){
