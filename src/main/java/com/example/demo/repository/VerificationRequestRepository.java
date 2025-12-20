@@ -9,5 +9,5 @@ import java.lang.Long;
 
 @Repository
 public interface VerificationRequestRepository extends JpaRepository<VerificationRequest, Long>{
-    List<VerificationRequest> getRequestsByCredential(Long credentialId);
+    List<VerificationRequest> findByCredentialId(Long credentialId);
 }
