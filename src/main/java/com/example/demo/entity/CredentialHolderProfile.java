@@ -18,7 +18,8 @@ public class CredentialHolderProfile{
     @Column(unique=true)
     private String email;
     private String organization;
-    private Boolean active;
+    @Column(nullable=false)
+    private Boolean active=true;
     private LocalDateTime createdAt;
 
     public Long getId(){
