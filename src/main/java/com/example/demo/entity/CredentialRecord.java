@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ public class CredentialRecord{
     @GeneratedValue (strategy=GenerationType.IDENTITY)
     private Long id;
     private Long holderId;
+    @Column(unique=true)
     private String credentialCode;
     private String title;
     private String issuer;

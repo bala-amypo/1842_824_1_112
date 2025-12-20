@@ -12,6 +12,7 @@ public class CredentialHolderProfile{
     @Id
     @GeneratedValue (strategy=GenerationType.IDENTITY)
     private Long id;
+    @Column(unique=true)
     private String holderId;
     private String fullName;
     @Column(unique=true)
