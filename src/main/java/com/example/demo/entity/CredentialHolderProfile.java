@@ -5,6 +5,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
+import jakarta.persistence.PrePersist;
 import java.time.LocalDateTime;
 
 @Entity
@@ -74,6 +75,15 @@ public class CredentialHolderProfile{
         return createdAt;
     }
 
+    public CredentialHolderProfile(Long id, String holderId, String fullName, String email, String organization, Boolean active, LocalDateTime createdAt){
+        this.id=id;
+        this.holderId=holderId;
+        this.fullName=fullName;
+        this.email=email;
+        this.organization=organization;
+        this.active=active;
+        this.createdAt=createdAt;
+    }
     public CredentialHolderProfile(){
     }
 }
