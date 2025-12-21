@@ -6,6 +6,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import java.time.LocalDateTime;
+import java.time.ManyToMany;
+import java.time.JoinTable;
+import java.time.JoinColumn;
 import java.util.List;
 
 @Entity
@@ -34,7 +37,7 @@ public class CredentialRecord{
     )
 
     private List<VerificationRule> rules;
-    
+
     public Long getId(){
         return id;
     }
