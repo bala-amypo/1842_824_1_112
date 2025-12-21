@@ -27,8 +27,8 @@ public class CredentialRecordController {
     }
 
     @PutMapping("/{id}")
-    public CredentialRecord updateCredential(@RequestBody CredentialRecord updated) {
-        return credentialService.updateCredential(updated);
+    public CredentialRecord updateCredential(@PathVariable Long id, @RequestBody CredentialRecord updated) {
+        return credentialService.updateCredential(id, updated);
     }
 
     @GetMapping("/holder/{holderId}")
