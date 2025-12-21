@@ -12,10 +12,10 @@ public class CredentialHolderProfile{
     @Id
     @GeneratedValue (strategy=GenerationType.IDENTITY)
     private Long id;
-    @Column(unique=true)
+    @Column(unique=true,nullable=false)
     private String holderId;
     private String fullName;
-    @Column(unique=true)
+    @Column(unique=true,nullable=false)
     private String email;
     private String organization;
     @Column(nullable=false)
@@ -23,6 +23,10 @@ public class CredentialHolderProfile{
     @Column(updatable=false)
     private LocalDateTime createdAt;
 
+    @PrePersist
+    public void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
     
     public Long getId(){
         return id;
@@ -69,19 +73,7 @@ public class CredentialHolderProfile{
     public LocalDateTime getCreatedAt(){
         return createdAt;
     }
-    public void setCreatedAt(LocalDateTime createdAt){
-        this.createdAt=createdAt;
-    }
 
-    public CredentialHolderProfile(Long id, String holderId, String fullName, String email, String organization, Boolean active, LocalDateTime createdAt){
-        this.id=id;
-        this.holderId=holderId;
-        this.fullName=fullName;
-        this.email=email;
-        this.organization=organization;
-        this.active=active;
-        this.createdAt=createdAt;
-    }
     public CredentialHolderProfile(){
     }
 }
