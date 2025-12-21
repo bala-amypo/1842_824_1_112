@@ -6,9 +6,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import java.time.LocalDateTime;
-import java.time.ManyToMany;
-import java.time.JoinTable;
-import java.time.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.JoinColumn;
 import java.util.List;
 
 @Entity
@@ -102,7 +102,7 @@ public class CredentialRecord{
     }
 
     public String getMetaDataJson(){
-        return credentialCode;
+        return metadataJson;
     }
     public void setMetaDataJson(String metadataJson){
         this.metadataJson=metadataJson;
