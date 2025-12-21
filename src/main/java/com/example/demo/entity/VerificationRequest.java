@@ -18,6 +18,11 @@ public class VerificationRequest{
     private LocalDateTime verifiedAt;
     private String resultMessage;
 
+    @PrePersist
+    public void onCreate() {
+        this.status = "PENDING";
+    }
+    
     public Long getId(){
         return id;
     }

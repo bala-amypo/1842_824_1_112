@@ -16,9 +16,14 @@ public class AuditTrailRecord{
     private Long id;
     private Long credentialId;
     private String eventType;
+    @Column(columnDefinition = "TEXT")
     private String details;
     private LocalDateTime loggedAt;
 
+    @PrePersist
+    public void onLog() {
+        this.loggedAt = LocalDateTime.now();
+    }
     public Long getId(){
         return id;
     }

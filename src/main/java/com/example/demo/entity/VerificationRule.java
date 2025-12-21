@@ -11,12 +11,12 @@ public class VerificationRule{
     @Id
     @GeneratedValue (strategy=GenerationType.IDENTITY)
     private Long id;
-    @Column(unique=true)
+    @Column(unique=true, nullable=false)
     private String ruleCode;
     private String description;
     private String appliesToType;
     private String validationExpression;
-    private Boolean active;
+    private Boolean active=true;
 
     public Long getId(){
         return id;
