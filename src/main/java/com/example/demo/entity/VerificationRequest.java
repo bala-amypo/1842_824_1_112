@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.PrePersist;
 import java.time.LocalDateTime;
 
 @Entity
@@ -22,7 +23,7 @@ public class VerificationRequest{
     public void onCreate() {
         this.status = "PENDING";
     }
-    
+
     public Long getId(){
         return id;
     }

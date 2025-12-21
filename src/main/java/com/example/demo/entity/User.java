@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Column;
 import java.time.LocalDateTime;
 
@@ -13,11 +14,19 @@ public class User{
     @GeneratedValue (strategy=GenerationType.IDENTITY)
     private Long id;
     private String fullName;
-    @Column(unique=true)
+    @Column(unique=true, nullable=false)
     private String email;
     private String password;
     private String role;
     private LocalDateTime createdAt;
+
+    @PrePersist
+    public void onCreate() {
+        this.createdAt = LocalDateTime.now();
+        if (this.role == null) {
+            this.role = "VIEWER";
+        }
+    }
 
     public Long getId(){
         return id;
@@ -56,9 +65,6 @@ public class User{
 
     public LocalDateTime getCreatedAt(){
         return createdAt;
-    }
-    public void setCreatedAt(LocalDateTime createdAt){
-        this.createdAt=createdAt;
     }
 
     public User(Long id, String fullName, String email, String password, String role, LocalDateTime createdAt){

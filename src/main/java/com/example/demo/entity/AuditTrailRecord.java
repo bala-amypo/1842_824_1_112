@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.PrePersist;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class AuditTrailRecord{
     public void onLog() {
         this.loggedAt = LocalDateTime.now();
     }
+
     public Long getId(){
         return id;
     }
@@ -55,9 +57,7 @@ public class AuditTrailRecord{
     public LocalDateTime getLoggedAt(){
         return loggedAt;
     }
-    public void setLoggedAt(LocalDateTime loggedAt){
-        this.loggedAt=loggedAt;
-    }
+    
 
     public AuditTrailRecord(Long id, Long credentialId, String eventType ,String details ,LocalDateTime loggedAt){
         this.id=id;
