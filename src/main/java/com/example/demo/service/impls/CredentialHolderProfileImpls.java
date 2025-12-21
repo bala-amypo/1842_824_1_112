@@ -10,8 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Service
-public class CredentialHolderProfileImpls
-        implements CredentialHolderProfileService {
+public class CredentialHolderProfileImpls implements CredentialHolderProfileService {
 
     @Autowired
     private CredentialHolderProfileRepository chpr;
@@ -24,9 +23,7 @@ public class CredentialHolderProfileImpls
 
     @Override
     public CredentialHolderProfile getHolderById(Long id) {
-        return chpr.findById(id)
-                .orElseThrow(() ->
-                        new RuntimeException("Holder not found"));
+        return chpr.findById(id).orElseThrow(() ->new RuntimeException("Holder not found"));
     }
 
     @Override
@@ -43,9 +40,7 @@ public class CredentialHolderProfileImpls
     public CredentialHolderProfile updateHolderStatus(
             Long id, boolean active) {
 
-        CredentialHolderProfile holder = chpr.findById(id)
-                .orElseThrow(() ->
-                        new RuntimeException("Holder not found"));
+        CredentialHolderProfile holder = chpr.findById(id).orElseThrow(() -> new RuntimeException("Holder not found"));
 
         holder.setActive(active);
         return chpr.save(holder);
