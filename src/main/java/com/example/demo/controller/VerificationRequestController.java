@@ -20,8 +20,7 @@ public class VerificationRequestController {
     private VerificationRequestService vrs;
 
     @PostMapping
-    public VerificationRequest initiateVerification(
-            @RequestBody VerificationRequest request) {
+    public VerificationRequest initiateVerification(@RequestBody VerificationRequest request) {
         return vrs.initiateVerification(request);
     }
 
