@@ -27,15 +27,12 @@ public class VerificationRequestImpls implements VerificationRequestService {
     @Override
     public VerificationRequest processVerification(Long requestId) {
         VerificationRequest req = vrr.findById(requestId).orElseThrow(() -> new RuntimeException("Request not found"));
-
-    boolean valid = true;
-
+        boolean valid = true;
         if (valid) {
             req.setStatus("SUCCESS");
         } else {
             req.setStatus("FAILED");
         }
-
         req.setVerifiedAt(LocalDateTime.now());
         return vrr.save(req);
     }

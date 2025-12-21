@@ -25,8 +25,7 @@ public class VerificationRuleImpls implements VerificationRuleService {
 
     @Override
     public VerificationRule updateRule(Long id, VerificationRule updatedRule) {
-        VerificationRule existing = vrr.findById(id)
-            .orElseThrow(() -> new RuntimeException("VerificationRule not found"));
+        VerificationRule existing = vrr.findById(id).orElseThrow(() -> new RuntimeException("VerificationRule not found"));
 
         existing.setRuleCode(updatedRule.getRuleCode());
         existing.setDescription(updatedRule.getDescription());
