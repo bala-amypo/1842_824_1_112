@@ -15,7 +15,7 @@ public class CredentialRecord{
     @GeneratedValue (strategy=GenerationType.IDENTITY)
     private Long id;
     private Long holderId;
-    @Column(unique=true)
+    @Column(unique=true, nullable=false)
     private String credentialCode;
     private String title;
     private String issuer;
@@ -23,8 +23,18 @@ public class CredentialRecord{
     private LocalDateTime expiryDate;
     private String credentialType;
     private String status;
+    @Column(columnDefinition = "TEXT")
     private String  metadataJson;
 
+    @ManyToMany
+    @JoinTable(
+        name = "credential_verification_rules",
+        joinColumns = @JoinColumn(name = "credential_id"),
+        inverseJoinColumns = @JoinColumn(name = "rule_id")
+    )
+
+    private List<VerificationRule> rules;
+    
     public Long getId(){
         return id;
     }
@@ -93,6 +103,13 @@ public class CredentialRecord{
     }
     public void setMetaDataJson(String metadataJson){
         this.metadataJson=metadataJson;
+    }
+
+    public List<VerificationRule> getRules(){
+        return rules; 
+    }
+    public void setRules(List<VerificationRule> rules){
+        this.rules = rules; 
     }
 
     public CredentialRecord(Long id , Long holderId, String credentialCode ,String title, String issuer, LocalDateTime issueDate, LocalDateTime expiryDate, String credentialType, String status, String  metadataJson){
