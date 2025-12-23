@@ -9,6 +9,5 @@ import java.util.List;
 @Repository
 public interface CredentialRecordRepository extends JpaRepository<CredentialRecord, Long>{
     List<CredentialRecord> findByHolderId(Long holderId);
-
     CredentialRecord findByCredentialCode(String credentialCode);
 }
