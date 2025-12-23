@@ -16,8 +16,7 @@ public class CredentialHolderProfileImpls implements CredentialHolderProfileServ
     private CredentialHolderProfileRepository chpr;
 
     @Override
-    public CredentialHolderProfile createHolder(
-            CredentialHolderProfile profile) {
+    public CredentialHolderProfile createHolder(CredentialHolderProfile profile) {
         return chpr.save(profile);
     }
 
