@@ -10,4 +10,8 @@ import java.util.List;
 public interface CredentialRecordRepository extends JpaRepository<CredentialRecord, Long>{
     List<CredentialRecord> findByHolderId(Long holderId);
     CredentialRecord findByCredentialCode(String credentialCode);
+
+    List<CredentialRecord> findExpiredBefore(LocalDate date);
+    List<CredentialRecord> findByStatusUsingHql(String status);
+    List<CredentialRecord> searchByIssuerAndType(String issuer, String credentialType);
 }
