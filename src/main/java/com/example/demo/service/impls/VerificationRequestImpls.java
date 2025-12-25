@@ -30,15 +30,16 @@ public class VerificationRequestImpls implements VerificationRequestService {
         VerificationRequest req = vrr.findById(requestId).orElseThrow(() -> new ResourceNotFoundException("Request not found"));
         CredentialRecord cred = credentialRepo.findById(req.getCredentialId()).orElseThrow(() -> new ResourceNotFoundException("Credential missing"));
 
-        boolean valid = true;
-        if (valid) {
-            req.setStatus("SUCCESS");
-        } else {
-            req.setStatus("FAILED");
-        }
-        req.setVerifiedAt(LocalDateTime.now());
-        return vrr.save(req);
+        ruleRepo.findByActiveTrue();
+
+    if (cred.getExpiryDate() != null && cred.getExpiryDate().isBefore(LocalDate.now())){
+        req.setStatus("FAILED");
+    } else {
+        req.setStatus("FAILED");
     }
+    req.setVerifiedAt(LocalDateTime.now());
+    return vrr.save(req);
+}
 
     @Override
     public List<VerificationRequest> getRequestsByCredential(Long credentialId) {
