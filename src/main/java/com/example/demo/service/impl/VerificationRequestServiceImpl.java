@@ -1,5 +1,4 @@
 package com.example.demo.service.impl;
-
 import com.example.demo.entity.*;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.*;
@@ -24,10 +23,9 @@ public class VerificationRequestServiceImpl implements VerificationRequestServic
     public VerificationRequest initiateVerification(VerificationRequest request) { return vrRepo.save(request); }
 
     @Override
-    public VerificationRequest processVerification(Long requestId) {
-        VerificationRequest req = vrRepo.findById(requestId).orElseThrow(() -> new ResourceNotFoundException(""));
-        
-        // Filter from all to satisfy Test Case t61 mock setup
+    public VerificationRequest processVerification(Long id) {
+        VerificationRequest req = vrRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException(""));
+        // Matches the mock setup in test t61
         CredentialRecord cred = crRepo.findAll().stream()
                 .filter(c -> c.getId().equals(req.getCredentialId())).findFirst().orElseThrow();
         

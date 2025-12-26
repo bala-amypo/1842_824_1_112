@@ -10,13 +10,9 @@ public class AppConfig {
     public PasswordEncoder passwordEncoder() {
         return new PasswordEncoder() {
             @Override
-            public String encode(CharSequence rawPassword) {
-                return rawPassword + "_ENC";
-            }
+            public String encode(CharSequence raw) { return raw + "_ENC"; }
             @Override
-            public boolean matches(CharSequence rawPassword, String encodedPassword) {
-                return encodedPassword.equals(rawPassword + "_ENC");
-            }
+            public boolean matches(CharSequence raw, String enc) { return enc.equals(raw + "_ENC"); }
         };
     }
 }

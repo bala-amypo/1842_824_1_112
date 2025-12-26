@@ -14,11 +14,11 @@ import java.io.IOException;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtUtil jwtUtil;
-    private final UserDetailsService userDetailsService;
+    private final UserDetailsService uds;
 
-    public JwtAuthenticationFilter(JwtUtil jwtUtil, @Lazy UserDetailsService userDetailsService) {
+    public JwtAuthenticationFilter(JwtUtil jwtUtil, @Lazy UserDetailsService uds) {
         this.jwtUtil = jwtUtil;
-        this.userDetailsService = userDetailsService;
+        this.uds = uds;
     }
 
     @Override
@@ -29,7 +29,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String token = header.substring(7);
             String username = jwtUtil.extractUsername(token);
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                UserDetails details = userDetailsService.loadUserByUsername(username);
+                UserDetails details = uds.loadUserByUsername(username);
                 if (jwtUtil.validateToken(token, details)) {
                     var auth = new UsernamePasswordAuthenticationToken(details, null, details.getAuthorities());
                     auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(req));
