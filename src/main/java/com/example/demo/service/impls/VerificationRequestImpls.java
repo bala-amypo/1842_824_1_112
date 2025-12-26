@@ -3,6 +3,7 @@ package com.example.demo.service.impls;
 import com.example.demo.service.VerificationRequestService;
 import com.example.demo.repository.VerificationRequestRepository;
 import com.example.demo.repository.CredentialRecordRepository;
+import com.example.demo.repository.VerificationRuleRepository;
 import com.example.demo.entity.VerificationRequest;
 import com.example.demo.entity.CredentialRecord;
 import com.example.demo.exception.ResourceNotFoundException;
@@ -34,7 +35,7 @@ public class VerificationRequestImpls implements VerificationRequestService {
         VerificationRequest req = vrr.findById(requestId).orElseThrow(() -> new ResourceNotFoundException("Request not found"));
         CredentialRecord cred = CredentialRecordRepository.findById(req.getCredentialId()).orElseThrow(() -> new ResourceNotFoundException("Credential missing"));
 
-        ruleRepo.findByActiveTrue();
+        VerificationRuleRepository.findByActiveTrue();
 
     if (cred.getExpiryDate() != null && cred.getExpiryDate().isBefore(LocalDate.now())){
         req.setStatus("FAILED");
