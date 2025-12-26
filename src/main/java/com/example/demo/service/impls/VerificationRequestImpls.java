@@ -2,22 +2,32 @@ package com.example.demo.service.impls;
 
 import com.example.demo.service.VerificationRequestService;
 import com.example.demo.repository.VerificationRequestRepository;
+import com.example.demo.repository.CredentialRecordRepository;
+import com.example.demo.repository.RuleRepository;
+
 import com.example.demo.entity.VerificationRequest;
 import com.example.demo.entity.CredentialRecord;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.example.demo.exception.ResourceNotFoundException;
+
 import java.util.List;
 import java.time.LocalDateTime;
-import java.lang.Long;
-
+import java.time.LocalDate;
 
 @Service
 public class VerificationRequestImpls implements VerificationRequestService {
 
     @Autowired
     private VerificationRequestRepository vrr;
+
+    @Autowired
+    private CredentialRecordRepository credentialRepo;
+
+    @Autowired
+    private RuleRepository ruleRepo;
 
     @Override
     public VerificationRequest initiateVerification(VerificationRequest request) {
@@ -27,19 +37,24 @@ public class VerificationRequestImpls implements VerificationRequestService {
 
     @Override
     public VerificationRequest processVerification(Long requestId) {
-        VerificationRequest req = vrr.findById(requestId).orElseThrow(() -> new ResourceNotFoundException("Request not found"));
-        CredentialRecord cred = credentialRepo.findById(req.getCredentialId()).orElseThrow(() -> new ResourceNotFoundException("Credential missing"));
 
-        ruleRepo.findByActiveTrue();
+        VerificationRequest req = vrr.findById(requestId)
+                .orElseThrow(() -> new ResourceNotFoundException("Request not found"));
 
-    if (cred.getExpiryDate() != null && cred.getExpiryDate().isBefore(LocalDate.now())){
-        req.setStatus("FAILED");
-    } else {
-        req.setStatus("FAILED");
+        CredentialRecord cred = credentialRepo.findById(req.getCredentialId())
+                .orElseThrow(() -> new ResourceNotFoundException("Credential missing"));
+
+        ruleRepo.findByActiveTrue();   // currently unused, but fine
+
+        if (cred.getExpiryDate() != null && cred.getExpiryDate().isBefore(LocalDate.now())) {
+            req.setStatus("FAILED");
+        } else {
+            req.setStatus("SUCCESS");
+        }
+
+        req.setVerifiedAt(LocalDateTime.now());
+        return vrr.save(req);
     }
-    req.setVerifiedAt(LocalDateTime.now());
-    return vrr.save(req);
-}
 
     @Override
     public List<VerificationRequest> getRequestsByCredential(Long credentialId) {
