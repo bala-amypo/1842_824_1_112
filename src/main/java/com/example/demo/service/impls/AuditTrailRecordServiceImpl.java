@@ -36,17 +36,26 @@ import com.example.demo.repository.AuditTrailRecordRepository;
 import com.example.demo.service.AuditTrailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Service @RequiredArgsConstructor
+@Service
+@RequiredArgsConstructor
 public class AuditTrailServiceImpl implements AuditTrailService {
+
     private final AuditTrailRecordRepository auditRepo;
 
+    @Override
     public AuditTrailRecord logEvent(AuditTrailRecord record) {
-        if (record.getLoggedAt() == null) record.setLoggedAt(LocalDateTime.now());
+        if (record.getLoggedAt() == null) {
+            record.setLoggedAt(LocalDateTime.now());
+        }
         return auditRepo.save(record);
     }
 
-    public List<AuditTrailRecord> getLogsByCredential(Long id) { return auditRepo.findByCredentialId(id); }
+    @Override
+    public List<AuditTrailRecord> getLogsByCredential(Long credentialId) {
+        return auditRepo.findByCredentialId(credentialId);
+    }
 }
