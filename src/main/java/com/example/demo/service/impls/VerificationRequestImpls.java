@@ -33,18 +33,14 @@ public class VerificationRequestImpls implements VerificationRequestService {
     @Override
     public VerificationRequest processVerification(Long requestId) {
 
-        VerificationRequest req = vrr.findById(requestId)
-                .orElseThrow(() -> new ResourceNotFoundException("Request not found"));
+        VerificationRequest req = vrr.findById(requestId).orElseThrow(() -> new ResourceNotFoundException("Request not found"));
 
-        CredentialRecord cred = credentialRepo.findById(req.getCredentialId())
-                .orElseThrow(() -> new ResourceNotFoundException("Credential missing"));
+        CredentialRecord cred = credentialRepo.findById(req.getCredentialId()).orElseThrow(() -> new ResourceNotFoundException("Credential missing"));
 
-        // Expiry validation
-        if (cred.getExpiryDate() != null &&
-            cred.getExpiryDate().isBefore(LocalDateTime.now())) {
-
+        if (cred.getExpiryDate() != null && cred.getExpiryDate().isBefore(LocalDateTime.now())) {
             req.setStatus("FAILED");
-        } else {
+        } 
+        else {
             req.setStatus("SUCCESS");
         }
 
