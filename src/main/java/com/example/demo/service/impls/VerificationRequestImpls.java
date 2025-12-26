@@ -7,6 +7,7 @@ import com.example.demo.repository.RuleRepository;
 
 import com.example.demo.entity.VerificationRequest;
 import com.example.demo.entity.CredentialRecord;
+import com.example.demo.repository.VerificationRuleRepository;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
