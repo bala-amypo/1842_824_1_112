@@ -42,7 +42,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class AuditTrailServiceImpl implements AuditTrailService {
+public class AuditTrailRecordServiceImpl implements AuditTrailRecordService {
 
     private final AuditTrailRecordRepository auditRepo;
 
