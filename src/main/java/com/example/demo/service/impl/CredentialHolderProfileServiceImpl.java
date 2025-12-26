@@ -16,17 +16,20 @@ public class CredentialHolderProfileServiceImpl implements CredentialHolderProfi
 
     @Override
     public CredentialHolderProfile createHolder(CredentialHolderProfile profile) {
+        // PDF Rules: createHolder must call holderRepo.save and return it
         return holderRepo.save(profile);
     }
 
     @Override
     public CredentialHolderProfile getHolderById(Long id) {
+        // PDF Rules: must call findById and throw ResourceNotFoundException if not found
         return holderRepo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Holder not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Holder not found with id: " + id));
     }
 
     @Override
     public CredentialHolderProfile updateStatus(Long id, boolean active) {
+        // PDF Rules: load existing, update active, save and return
         CredentialHolderProfile existing = getHolderById(id);
         existing.setActive(active);
         return holderRepo.save(existing);

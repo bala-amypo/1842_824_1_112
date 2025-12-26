@@ -1,35 +1,27 @@
-   package com.example.demo.controller;
+package com.example.demo.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import com.example.demo.entity.AuditTrailRecord;
 import com.example.demo.service.AuditTrailService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/audit")
 public class AuditTrailController {
-    @Autowired
-    private AuditTrailService atrs;
+    private final AuditTrailService atrs;
+
+    public AuditTrailController(AuditTrailService atrs) {
+        this.atrs = atrs;
+    }
 
     @PostMapping
-    public AuditTrailRecord addAuditTrailRecord(@RequestBody AuditTrailRecord atr){
-        return atrs.logEvent(atr);
+    public ResponseEntity<AuditTrailRecord> log(@RequestBody AuditTrailRecord record) {
+        return ResponseEntity.ok(atrs.logEvent(record));
     }
 
-    @GetMapping("/{credentialId}")
-    public List<AuditTrailRecord> getByCredential(@PathVariable Long credentialId){
-        return atrs.getLogsByCredential(credentialId);
-    }
-
-    @GetMapping
-    public List<AuditTrailRecord> getAll(){
-        return atrs.getAllLogs();
+    @GetMapping("/credential/{credentialId}")
+    public ResponseEntity<List<AuditTrailRecord>> getByCredential(@PathVariable Long credentialId) {
+        return ResponseEntity.ok(atrs.getLogsByCredential(credentialId));
     }
 }
