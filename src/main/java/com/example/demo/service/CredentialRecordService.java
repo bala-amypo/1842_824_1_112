@@ -1,9 +1,11 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.CredentialRecord;
+import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
-
+ 
+@Service
 public interface CredentialRecordService {
     CredentialRecord createCredential(CredentialRecord record);
     CredentialRecord updateCredential(Long id, CredentialRecord updated);
