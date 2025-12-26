@@ -10,6 +10,10 @@ import java.util.List;
 
 public interface CredentialRecordRepository extends JpaRepository<CredentialRecord, Long> {
 
+    List<CredentialRecord> findByHolderId(Long holderId);
+
+    CredentialRecord findByCredentialCode(String code);
+
     List<CredentialRecord> findExpiredBefore(LocalDate date);
 
     @Query("SELECT c FROM CredentialRecord c WHERE c.status = :status")
@@ -17,8 +21,4 @@ public interface CredentialRecordRepository extends JpaRepository<CredentialReco
 
     @Query("SELECT c FROM CredentialRecord c WHERE c.issuer = :issuer AND c.credentialType = :type")
     List<CredentialRecord> searchByIssuerAndType(@Param("issuer") String issuer, @Param("type") String type);
-
-    List<CredentialRecord> findByHolderId(Long holderId);
-
-    CredentialRecord findByCredentialCode(String code);
 }
