@@ -3,11 +3,9 @@ package com.example.demo.service.impls;
 import com.example.demo.service.VerificationRequestService;
 import com.example.demo.repository.VerificationRequestRepository;
 import com.example.demo.repository.CredentialRecordRepository;
-import com.example.demo.repository.RuleRepository;
 
 import com.example.demo.entity.VerificationRequest;
 import com.example.demo.entity.CredentialRecord;
-import com.example.demo.repository.VerificationRuleRepository;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,6 @@ import com.example.demo.exception.ResourceNotFoundException;
 
 import java.util.List;
 import java.time.LocalDateTime;
-import java.time.LocalDate;
 
 @Service
 public class VerificationRequestImpls implements VerificationRequestService {
@@ -26,9 +23,6 @@ public class VerificationRequestImpls implements VerificationRequestService {
 
     @Autowired
     private CredentialRecordRepository credentialRepo;
-
-    @Autowired
-    private RuleRepository ruleRepo;
 
     @Override
     public VerificationRequest initiateVerification(VerificationRequest request) {
@@ -45,9 +39,10 @@ public class VerificationRequestImpls implements VerificationRequestService {
         CredentialRecord cred = credentialRepo.findById(req.getCredentialId())
                 .orElseThrow(() -> new ResourceNotFoundException("Credential missing"));
 
-        ruleRepo.findByActiveTrue();   // currently unused, but fine
+        // Expiry validation
+        if (cred.getExpiryDate() != null &&
+            cred.getExpiryDate().isBefore(LocalDateTime.now())) {
 
-        if (cred.getExpiryDate() != null && cred.getExpiryDate().isBefore(LocalDate.now())) {
             req.setStatus("FAILED");
         } else {
             req.setStatus("SUCCESS");
