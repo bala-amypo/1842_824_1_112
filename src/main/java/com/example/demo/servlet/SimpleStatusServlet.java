@@ -8,7 +8,7 @@ public class SimpleStatusServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/plain");
-        // Required for t01, t05, t08
+        // Exact text required by test t01
         resp.getWriter().print("Digital Credential Verification Engine is running");
     }
 }
