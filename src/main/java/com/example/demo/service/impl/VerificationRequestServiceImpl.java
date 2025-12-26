@@ -25,18 +25,14 @@ public class VerificationRequestServiceImpl implements VerificationRequestServic
     @Override
     public VerificationRequest processVerification(Long id) {
         VerificationRequest req = vrRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException(""));
-        // Matches Test Case t61: uses crRepo.findAll() to find specific credential
         CredentialRecord cred = crRepo.findAll().stream()
                 .filter(c -> c.getId().equals(req.getCredentialId())).findFirst().orElseThrow();
-        
         ruleRepo.findByActiveTrue();
-
         if (cred.getExpiryDate() != null && cred.getExpiryDate().isBefore(LocalDate.now())) {
             req.setStatus("FAILED");
         } else {
             req.setStatus("SUCCESS");
         }
-
         AuditTrailRecord log = new AuditTrailRecord();
         log.setCredentialId(cred.getId());
         auditService.logEvent(log);
