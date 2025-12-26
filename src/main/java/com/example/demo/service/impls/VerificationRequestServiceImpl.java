@@ -15,7 +15,7 @@ import java.util.List;
 import java.time.LocalDateTime;
 
 @Service
-public class VerificationRequestImpls implements VerificationRequestService {
+public class VerificationRequestServiceImpl implements VerificationRequestService {
 
     @Autowired
     private VerificationRequestRepository vrr;

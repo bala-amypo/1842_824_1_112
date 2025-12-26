@@ -10,7 +10,7 @@
     import java.util.List;
 
     @Service
-    public class CredentialHolderProfileImpls implements CredentialHolderProfileService {
+    public class CredentialHolderProfileServiceImpl implements CredentialHolderProfileService {
 
         @Autowired
         private CredentialHolderProfileRepository chpr;

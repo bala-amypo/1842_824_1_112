@@ -12,7 +12,7 @@ import java.lang.Long;
 import java.lang.String;
 
 @Service
-public class UserImpls implements UserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository ur;

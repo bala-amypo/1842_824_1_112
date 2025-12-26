@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class CredentialRecordImpls implements CredentialRecordService {
+public class CredentialRecordServiceImpl implements CredentialRecordService {
 
     private final CredentialRecordRepository crr;
 
