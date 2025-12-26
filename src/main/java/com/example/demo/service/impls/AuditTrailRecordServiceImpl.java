@@ -33,7 +33,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.entity.AuditTrailRecord;
 import com.example.demo.repository.AuditTrailRecordRepository;
-import com.example.demo.service.AuditTrailService;
+import com.example.demo.service.AuditTrailRecordService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -86,7 +86,7 @@ public class VerificationRequestServiceImpl implements VerificationRequestServic
     private final VerificationRequestRepository repo;
     private final CredentialRecordRepository credentialRepo;
     private final VerificationRuleRepository ruleRepo;
-    private final AuditTrailService auditService;
+    private final AuditTrailRecordService auditService;
 
     public VerificationRequest initiateVerification(VerificationRequest request) { return repo.save(request); }
     public List<VerificationRequest> getRequestsByCredential(Long id) { return repo.findByCredentialId(id); }
