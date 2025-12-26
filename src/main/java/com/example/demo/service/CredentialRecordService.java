@@ -8,6 +8,6 @@ public interface CredentialRecordService {
     CredentialRecord updateCredential(Long id, CredentialRecord update);
     List<CredentialRecord> getCredentialsByHolder(Long holderId);
     CredentialRecord getCredentialByCode(String code);
-    // Add this to support the logic required by tests t61 and t62
+    // Needed to support the logic in VerificationRequestServiceImpl
     List<CredentialRecord> getAllCredentials();
 }
