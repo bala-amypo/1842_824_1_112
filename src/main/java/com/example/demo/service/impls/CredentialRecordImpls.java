@@ -1,65 +1,63 @@
-package com.example.demo.service.impl;
-
-import com.example.demo.entity.CredentialRecord;
-import com.example.demo.exception.BadRequestException;
-import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.repository.CredentialRecordRepository;
 import com.example.demo.service.CredentialRecordService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.repository.CredentialRecordRepository;
+import com.example.demo.entity.CredentialRecord;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class CredentialRecordImpls implements CredentialRecordService {
 
-    @Autowired
-    private CredentialRecordRepository credentialRecordRepository;
+    private final CredentialRecordRepository crr;
 
-    // CREATE
-    @Override
-    public CredentialRecord createCredential(CredentialRecord credentialRecord) {
-        if (credentialRecord.getHolderId() == null || credentialRecord.getCredentialCode() == null) {
-            throw new BadRequestException("HolderId & CredentialCode cannot be null");
-        }
-        return credentialRecordRepository.save(credentialRecord);
+    public CredentialRecordImpls(CredentialRecordRepository crr) {
+        this.crr = crr;
     }
 
-    // GET ALL
+    @Override
+    public CredentialRecord createCredential(CredentialRecord record) {
+        if (record.getStatus() == null) record.setStatus("VALID");
+        return crr.save(record);
+    }
+
+    @Override
+    public CredentialRecord updateCredential(Long id, CredentialRecord updated) {
+        CredentialRecord existing = crr.findById(id)
+            .orElseThrow(() -> new RuntimeException("Credential not found"));
+        existing.setCredentialCode(updated.getCredentialCode());
+        existing.setHolderId(updated.getHolderId());
+        existing.setStatus(updated.getStatus());
+        return crr.save(existing);
+    }
+
     @Override
     public List<CredentialRecord> getAllCredentials() {
-        return credentialRecordRepository.findAll();
+        return crr.findAll();
     }
 
-    // GET BY ID
     @Override
-    public CredentialRecord getCredentialById(Long id) {
-        return credentialRecordRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Credential not found with Id: " + id));
+    public List<CredentialRecord> getCredentialsByHolder(Long holderId) {
+        return crr.findByHolderId(holderId);
     }
 
-    // UPDATE
     @Override
-    public CredentialRecord updateCredential(Long id, CredentialRecord updatedData) {
-        CredentialRecord existing = credentialRecordRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Cannot update, no record found with Id: " + id));
-
-        existing.setCredentialCode(updatedData.getCredentialCode());
-        existing.setTitle(updatedData.getTitle());
-        existing.setIssuedDate(updatedData.getIssuedDate());
-        existing.setExpiryDate(updatedData.getExpiryDate());
-        existing.setStatus(updatedData.getStatus());
-
-        return credentialRecordRepository.save(existing);
+    public CredentialRecord getCredentialByCode(String code) {
+        return crr.findByCredentialCode(code);
     }
 
-    // DELETE
     @Override
-    public String deleteCredential(Long id) {
-        CredentialRecord record = credentialRecordRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("No record found to delete with Id: " + id));
+    public List<CredentialRecord> findByExpiryDateBefore(LocalDateTime date) {
+        return crr.findByExpiryDateBefore(date);
+    }
 
-        credentialRecordRepository.delete(record);
-        return "Credential deleted successfully with Id: " + id;
+    @Override
+    public List<CredentialRecord> findByStatusUsingHql(String status) {
+        return crr.findByStatusUsingHql(status);
+    }
+
+    @Override
+    public List<CredentialRecord> searchByIssuerAndType(String issuer, String type) {
+        return crr.searchByIssuerAndType(issuer, type);
     }
 }
