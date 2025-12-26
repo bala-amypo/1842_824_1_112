@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.entity.CredentialRecord;
 import java.util.List;
+import java.time.LocalDate;
 
 @Repository
 public interface CredentialRecordRepository extends JpaRepository<CredentialRecord, Long>{
