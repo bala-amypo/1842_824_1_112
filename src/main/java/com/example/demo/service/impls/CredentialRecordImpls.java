@@ -13,7 +13,6 @@ public class CredentialRecordImpls implements CredentialRecordService {
 
     private final CredentialRecordRepository crr;
 
-    // ✅ Constructor Injection
     public CredentialRecordImpls(CredentialRecordRepository crr) {
         this.crr = crr;
     }
@@ -50,8 +49,8 @@ public class CredentialRecordImpls implements CredentialRecordService {
     }
 
     @Override
-    public List<CredentialRecord> findExpiredBefore(LocalDate date) {
-        return crr.findExpiredBefore(date);
+    public List<CredentialRecord> findByExpiryDateBefore(LocalDate date) {
+        return crr.crr.findByExpiryDateBefore(date);
     }
 
     @Override
