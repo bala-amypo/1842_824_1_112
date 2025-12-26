@@ -47,23 +47,37 @@
 //     }
 // }
 
-package com.example.demo.service.impl;
+package com.example.demo.service.impls;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.VerificationRule;
 import com.example.demo.repository.VerificationRuleRepository;
 import com.example.demo.service.VerificationRuleService;
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class VerificationRuleServiceImpl implements VerificationRuleService {
 
-    private final VerificationRuleRepository ruleRepo;
+    private final VerificationRuleRepository repository;
 
     @Override
-    public VerificationRule createRule(VerificationRule rule) {
-        // Business Rule: Ensure ruleCode is unique (handled by @Column(unique=true) or service check)
-        return ruleRepo.save(rule);
+    public VerificationRule updateRule(Long id, VerificationRule rule) {
+        rule.setId(id);
+        return repository.save(rule);
+    }
+
+    @Override
+    public List<VerificationRule> getActiveRules() {
+        return repository.findByActiveTrue();
+    }
+
+    @Override
+    public List<VerificationRule> getAllRules() {
+        return repository.findAll();
     }
 }

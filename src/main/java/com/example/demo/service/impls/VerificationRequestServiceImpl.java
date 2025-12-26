@@ -68,50 +68,26 @@
 //     }
 // }
 
+package com.example.demo.service.impls;
 
-
-package com.example.demo.service.impl;
-
-import com.example.demo.entity.*;
-import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.repository.*;
-import com.example.demo.service.*;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import java.time.LocalDate;
 import java.util.List;
 
-@Service @RequiredArgsConstructor
+import org.springframework.stereotype.Service;
+
+import com.example.demo.entity.VerificationRequest;
+import com.example.demo.repository.VerificationRequestRepository;
+import com.example.demo.service.VerificationRequestService;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
 public class VerificationRequestServiceImpl implements VerificationRequestService {
-    private final VerificationRequestRepository repo;
-    private final CredentialRecordRepository credentialRepo;
-    private final VerificationRuleRepository ruleRepo;
-    private final AuditTrailRecordService auditService;
 
-    public VerificationRequest initiateVerification(VerificationRequest request) { return repo.save(request); }
-    public List<VerificationRequest> getRequestsByCredential(Long id) { return repo.findByCredentialId(id); }
+    private final VerificationRequestRepository repository;
 
-    public VerificationRequest processVerification(Long requestId) {
-        VerificationRequest request = repo.findById(requestId).orElseThrow(() -> new ResourceNotFoundException(""));
-        
-        // Find matching credential from the pool (Test 61 mocks findAll)
-        CredentialRecord cred = credentialRepo.findAll().stream()
-                .filter(c -> c.getId().equals(request.getCredentialId()))
-                .findFirst()
-                .orElseThrow(() -> new ResourceNotFoundException(""));
-
-        ruleRepo.findByActiveTrue(); // Requirement: Fetch rules
-
-        if (cred.getExpiryDate() != null && cred.getExpiryDate().isBefore(LocalDate.now())) {
-            request.setStatus("FAILED");
-        } else {
-            request.setStatus("SUCCESS");
-        }
-
-        AuditTrailRecord audit = new AuditTrailRecord();
-        audit.setCredentialId(cred.getId());
-        auditService.logEvent(audit);
-
-        return repo.save(request);
+    @Override
+    public List<VerificationRequest> getAllRequests() {
+        return repository.findAll();
     }
 }
