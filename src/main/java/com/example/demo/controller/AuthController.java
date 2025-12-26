@@ -33,34 +33,80 @@
 
 package com.example.demo.controller;
 
-import com.example.demo.dto.*;
-import com.example.demo.entity.User;
-import com.example.demo.security.JwtUtil;
-import com.example.demo.service.UserService;
-import lombok.RequiredArgsConstructor;
+import java.util.ArrayList;
+
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.*;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-@RestController @RequestMapping("/auth") @RequiredArgsConstructor
+import com.example.demo.dto.JwtResponse;
+import com.example.demo.entity.User;
+import com.example.demo.repository.UserRepository;
+import com.example.demo.security.JwtUtil;
+
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequestMapping("/api/auth")
+@RequiredArgsConstructor
 public class AuthController {
-    private final UserService userService;
+
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
+    private final UserRepository userRepository;
 
-    @PostMapping("/register")
-    public ResponseEntity<JwtResponse> register(@RequestBody RegisterRequest req) {
-        User user = new User(null, req.getFullName(), req.getEmail(), req.getPassword(), req.getRole());
-        User saved = userService.registerUser(user);
-        String token = jwtUtil.generateToken(saved.getId(), saved.getEmail(), saved.getRole());
-        return ResponseEntity.ok(new JwtResponse(token, saved.getId(), saved.getEmail(), saved.getRole()));
+    // 🔐 LOGIN
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody User request) {
+
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getEmail(),
+                        request.getPassword()
+                )
+        );
+
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow();
+
+        // ✅ FIXED TOKEN GENERATION
+        UserDetails userDetails = new org.springframework.security.core.userdetails.User(
+                user.getEmail(),
+                user.getPassword(),
+                new ArrayList<>()
+        );
+
+        String token = jwtUtil.generateToken(userDetails);
+
+        return ResponseEntity.ok(
+                new JwtResponse(user.getId(), user.getEmail(), user.getRole(), token)
+        );
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<JwtResponse> login(@RequestBody LoginRequest req) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(req.getEmail(), req.getPassword()));
-        User user = userService.findByEmail(req.getEmail());
-        String token = jwtUtil.generateToken(user.getId(), user.getEmail(), user.getRole());
-        return ResponseEntity.ok(new JwtResponse(token, user.getId(), user.getEmail(), user.getRole()));
+    // 📝 REGISTER
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody User request) {
+
+        User user = new User();
+        user.setEmail(request.getEmail());
+        user.setPassword(request.getPassword());
+        user.setRole(request.getRole());
+
+        User saved = userRepository.save(user);
+
+        // ✅ FIXED TOKEN GENERATION
+        UserDetails userDetails = new org.springframework.security.core.userdetails.User(
+                saved.getEmail(),
+                saved.getPassword(),
+                new ArrayList<>()
+        );
+
+        String token = jwtUtil.generateToken(userDetails);
+
+        return ResponseEntity.ok(
+                new JwtResponse(saved.getId(), saved.getEmail(), saved.getRole(), token)
+        );
     }
 }
