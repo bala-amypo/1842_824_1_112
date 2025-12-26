@@ -12,7 +12,7 @@ public interface CredentialRecordRepository extends JpaRepository<CredentialReco
     List<CredentialRecord> findByHolderId(Long holderId);
     CredentialRecord findByCredentialCode(String credentialCode);
 
-    List<CredentialRecord> findExpiredBefore(LocalDate date);
+    List<CredentialRecord> findByExpiryDateBefore(LocalDate date);
     List<CredentialRecord> findByStatusUsingHql(String status);
     List<CredentialRecord> searchByIssuerAndType(String issuer, String credentialType);
 }
