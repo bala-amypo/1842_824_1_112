@@ -5,15 +5,14 @@ import com.example.demo.repository.CredentialRecordRepository;
 import com.example.demo.entity.CredentialRecord;
 
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 @Service
 public class CredentialRecordImpls implements CredentialRecordService {
 
-    @Autowired
-    private CredentialRecordRepository crr;
+    private final CredentialRecordRepository crr;
 
     public CredentialRecordImpls(CredentialRecordRepository crr) {
         this.crr = crr;  
