@@ -1,18 +1,14 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.CredentialRecord;
-import org.springframework.stereotype.Service;
-import java.time.LocalDateTime;
 import java.util.List;
- 
-@Service
+
 public interface CredentialRecordService {
-    CredentialRecord createCredential(CredentialRecord record);
-    CredentialRecord updateCredential(Long id, CredentialRecord updated);
+    CredentialRecord createCredential(CredentialRecord credentialRecord);
     List<CredentialRecord> getAllCredentials();
-    List<CredentialRecord> getCredentialsByHolder(Long holderId);
-    CredentialRecord getCredentialByCode(String code);
-    List<CredentialRecord> findByExpiryDateBefore(LocalDateTime date); 
-    List<CredentialRecord> findByStatusUsingHql(String status);
-    List<CredentialRecord> searchByIssuerAndType(String issuer, String type);
+    CredentialRecord getCredentialById(Long id);
+    List<CredentialRecord> getCredentialsByHolder(Long holderId);  // NEW
+    CredentialRecord getCredentialByCode(String credentialCode);   
+    CredentialRecord updateCredential(Long id, CredentialRecord updatedData);
+    String deleteCredential(Long id);
 }

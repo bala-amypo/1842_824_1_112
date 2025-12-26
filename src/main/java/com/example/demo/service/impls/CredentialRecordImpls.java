@@ -1,63 +1,65 @@
-import com.example.demo.service.CredentialRecordService;
-import com.example.demo.repository.CredentialRecordRepository;
+package com.example.demo.service.impl;
+
 import com.example.demo.entity.CredentialRecord;
+import com.example.demo.exception.BadRequestException;
+import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.repository.CredentialRecordRepository;
+import com.example.demo.service.CredentialRecordService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class CredentialRecordImpls implements CredentialRecordService {
 
-    private final CredentialRecordRepository crr;
+    @Autowired
+    private CredentialRecordRepository credentialRecordRepository;
 
-    public CredentialRecordImpls(CredentialRecordRepository crr) {
-        this.crr = crr;
-    }
-
+    // CREATE
     @Override
-    public CredentialRecord createCredential(CredentialRecord record) {
-        if (record.getStatus() == null) record.setStatus("VALID");
-        return crr.save(record);
+    public CredentialRecord createCredential(CredentialRecord credentialRecord) {
+        if (credentialRecord.getHolderId() == null || credentialRecord.getCredentialCode() == null) {
+            throw new BadRequestException("HolderId & CredentialCode cannot be null");
+        }
+        return credentialRecordRepository.save(credentialRecord);
     }
 
-    @Override
-    public CredentialRecord updateCredential(Long id, CredentialRecord updated) {
-        CredentialRecord existing = crr.findById(id)
-            .orElseThrow(() -> new RuntimeException("Credential not found"));
-        existing.setCredentialCode(updated.getCredentialCode());
-        existing.setHolderId(updated.getHolderId());
-        existing.setStatus(updated.getStatus());
-        return crr.save(existing);
-    }
-
+    // GET ALL
     @Override
     public List<CredentialRecord> getAllCredentials() {
-        return crr.findAll();
+        return credentialRecordRepository.findAll();
     }
 
+    // GET BY ID
     @Override
-    public List<CredentialRecord> getCredentialsByHolder(Long holderId) {
-        return crr.findByHolderId(holderId);
+    public CredentialRecord getCredentialById(Long id) {
+        return credentialRecordRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Credential not found with Id: " + id));
     }
 
+    // UPDATE
     @Override
-    public CredentialRecord getCredentialByCode(String code) {
-        return crr.findByCredentialCode(code);
+    public CredentialRecord updateCredential(Long id, CredentialRecord updatedData) {
+        CredentialRecord existing = credentialRecordRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Cannot update, no record found with Id: " + id));
+
+        existing.setCredentialCode(updatedData.getCredentialCode());
+        existing.setTitle(updatedData.getTitle());
+        existing.setIssuedDate(updatedData.getIssuedDate());
+        existing.setExpiryDate(updatedData.getExpiryDate());
+        existing.setStatus(updatedData.getStatus());
+
+        return credentialRecordRepository.save(existing);
     }
 
+    // DELETE
     @Override
-    public List<CredentialRecord> findByExpiryDateBefore(LocalDateTime date) {
-        return crr.findByExpiryDateBefore(date);
-    }
+    public String deleteCredential(Long id) {
+        CredentialRecord record = credentialRecordRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No record found to delete with Id: " + id));
 
-    @Override
-    public List<CredentialRecord> findByStatusUsingHql(String status) {
-        return crr.findByStatusUsingHql(status);
-    }
-
-    @Override
-    public List<CredentialRecord> searchByIssuerAndType(String issuer, String type) {
-        return crr.searchByIssuerAndType(issuer, type);
+        credentialRecordRepository.delete(record);
+        return "Credential deleted successfully with Id: " + id;
     }
 }
