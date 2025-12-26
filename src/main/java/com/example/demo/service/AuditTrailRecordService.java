@@ -5,7 +5,10 @@ import com.example.demo.entity.AuditTrailRecord;
 
 public interface AuditTrailRecordService {
     
+    // AuditTrailRecord logEvent(AuditTrailRecord record);
+    // List<AuditTrailRecord> getLogsByCredential(Long credentialId);
+    // List<AuditTrailRecord> getAllLogs();
+
     AuditTrailRecord logEvent(AuditTrailRecord record);
     List<AuditTrailRecord> getLogsByCredential(Long credentialId);
-    List<AuditTrailRecord> getAllLogs();
 }
