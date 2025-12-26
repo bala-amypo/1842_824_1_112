@@ -5,3 +5,4 @@ public interface UserService {
     User registerUser(User user);
     User findByEmail(String email);
 }
+

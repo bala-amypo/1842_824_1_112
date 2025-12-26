@@ -19,3 +19,4 @@ public interface CredentialHolderProfileService {
     CredentialHolderProfile getHolderById(Long id);
     CredentialHolderProfile updateStatus(Long id, boolean active);
 }
+
