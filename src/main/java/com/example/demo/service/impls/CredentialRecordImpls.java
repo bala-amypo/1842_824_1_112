@@ -15,6 +15,10 @@ public class CredentialRecordImpls implements CredentialRecordService {
     @Autowired
     private CredentialRecordRepository crr;
 
+    public CredentialRecordImpls(CredentialRecordRepository crr) {
+        this.crr = crr;  
+    }
+
     @Override
     public CredentialRecord createCredential(CredentialRecord record) {
         if (record.getStatus() == null) {

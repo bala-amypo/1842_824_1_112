@@ -1,23 +1,24 @@
 package com.example.demo.repository;
 
+import com.example.demo.entity.CredentialRecord;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import com.example.demo.entity.CredentialRecord;
-import java.util.List;
+
 import java.time.LocalDate;
+import java.util.List;
 
+public interface CredentialRecordRepository extends JpaRepository<CredentialRecord, Long> {
 
-@Repository
-public interface CredentialRecordRepository extends JpaRepository<CredentialRecord, Long>{
-    List<CredentialRecord> findByHolderId(Long holderId);
-    CredentialRecord findByCredentialCode(String credentialCode);
-
-    List<CredentialRecord> findByExpiryDateBefore(LocalDate date);
+    List<CredentialRecord> findExpiredBefore(LocalDate date);
 
     @Query("SELECT c FROM CredentialRecord c WHERE c.status = :status")
     List<CredentialRecord> findByStatusUsingHql(@Param("status") String status);
 
-    List<CredentialRecord> searchByIssuerAndType(String issuer, String credentialType);
+    @Query("SELECT c FROM CredentialRecord c WHERE c.issuer = :issuer AND c.credentialType = :type")
+    List<CredentialRecord> searchByIssuerAndType(@Param("issuer") String issuer, @Param("type") String type);
+
+    List<CredentialRecord> findByHolderId(Long holderId);
+
+    CredentialRecord findByCredentialCode(String code);
 }
