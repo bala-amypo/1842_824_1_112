@@ -14,8 +14,6 @@ import com.example.demo.security.JwtUtil;
 import com.example.demo.service.UserService;
 
 import lombok.RequiredArgsConstructor;
-import java.util.Long;
-import java.util.String;
 
 @RestController
 @RequestMapping("/api/auth")
