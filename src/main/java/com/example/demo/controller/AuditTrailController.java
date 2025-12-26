@@ -14,9 +14,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/audit")
-public class AuditTrailRecordController {
+public class AuditTrailController {
     @Autowired
-    private AuditTrailRecordService atrs;
+    private AuditTrailService atrs;
 
     @PostMapping
     public AuditTrailRecord addAuditTrailRecord(@RequestBody AuditTrailRecord atr){
