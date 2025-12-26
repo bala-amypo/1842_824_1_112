@@ -1,6 +1,6 @@
 package com.example.demo.service.impls;
 
-import com.example.demo.service.AuditTrailRecordService;
+import com.example.demo.service.AuditTrailService;
 import com.example.demo.repository.AuditTrailRecordRepository;
 import com.example.demo.entity.AuditTrailRecord;
 import org.springframework.stereotype.Service;
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Service
-public class AuditTrailRecordServiceImpl implements AuditTrailRecordService{
+public class AuditTrailRecordServiceImpl implements AuditTrailService{
     
     @Autowired
     private AuditTrailRecordRepository atrr;
