@@ -1,11 +1,9 @@
-package com.example.demo.service.impls;
-
 import com.example.demo.service.CredentialRecordService;
 import com.example.demo.repository.CredentialRecordRepository;
 import com.example.demo.entity.CredentialRecord;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -49,8 +47,8 @@ public class CredentialRecordImpls implements CredentialRecordService {
     }
 
     @Override
-    public List<CredentialRecord> findByExpiryDateBefore(LocalDate date) {
-        return crr.crr.findByExpiryDateBefore(date);
+    public List<CredentialRecord> findByExpiryDateBefore(LocalDateTime date) {
+        return crr.findByExpiryDateBefore(date);
     }
 
     @Override
