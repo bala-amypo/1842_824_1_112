@@ -1,81 +1,40 @@
 package com.example.demo.controller;
-
-import java.util.ArrayList;
-
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.*;
-
-import com.example.demo.dto.JwtResponse;
+import com.example.demo.dto.*;
 import com.example.demo.entity.User;
 import com.example.demo.security.JwtUtil;
 import com.example.demo.service.UserService;
-
-import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.*;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/auth")
-@RequiredArgsConstructor
+@RequestMapping("/auth")
 public class AuthController {
-
-    private final AuthenticationManager authenticationManager;
+    private final UserService userService;
+    private final AuthenticationManager authManager;
     private final JwtUtil jwtUtil;
-    private final UserService us;
 
-    // 📝 REGISTER
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody User request) {
-
-        User saved = us.registerUser(request);
-
-        UserDetails userDetails = new org.springframework.security.core.userdetails.User(
-                saved.getEmail(),
-                saved.getPassword(),
-                new ArrayList<>()
-        );
-
-        String token = jwtUtil.generateToken(userDetails);
-
-        return ResponseEntity.ok(
-                new JwtResponse(
-                        saved.getId(), // Fixed: Passing Long directly
-                        saved.getEmail(),
-                        saved.getRole(),
-                        token
-                )
-        );
+    public AuthController(UserService userService, AuthenticationManager authManager, JwtUtil jwtUtil) {
+        this.userService = userService; this.authManager = authManager; this.jwtUtil = jwtUtil;
     }
 
-    // 🔐 LOGIN
+    @PostMapping("/register")
+    public ResponseEntity<JwtResponse> register(@RequestBody RegisterRequest req) {
+        User user = new User();
+        user.setFullName(req.getFullName());
+        user.setEmail(req.getEmail());
+        user.setPassword(req.getPassword());
+        user.setRole(req.getRole());
+        User saved = userService.registerUser(user);
+        String token = jwtUtil.generateToken(saved.getId(), saved.getEmail(), saved.getRole());
+        return ResponseEntity.ok(new JwtResponse(token, saved.getId(), saved.getEmail(), saved.getRole()));
+    }
+
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User request) {
-
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
-                        request.getPassword()
-                )
-        );
-
-        User user = us.findByEmail(request.getEmail());
-
-        UserDetails userDetails = new org.springframework.security.core.userdetails.User(
-                user.getEmail(),
-                user.getPassword(),
-                new ArrayList<>()
-        );
-
-        String token = jwtUtil.generateToken(userDetails);
-
-        return ResponseEntity.ok(
-                new JwtResponse(
-                        user.getId(), // Fixed: Passing Long directly
-                        user.getEmail(),
-                        user.getRole(),
-                        token
-                )
-        );
+    public ResponseEntity<JwtResponse> login(@RequestBody LoginRequest req) {
+        authManager.authenticate(new UsernamePasswordAuthenticationToken(req.getEmail(), req.getPassword()));
+        User user = userService.findByEmail(req.getEmail());
+        String token = jwtUtil.generateToken(user.getId(), user.getEmail(), user.getRole());
+        return ResponseEntity.ok(new JwtResponse(token, user.getId(), user.getEmail(), user.getRole()));
     }
 }
