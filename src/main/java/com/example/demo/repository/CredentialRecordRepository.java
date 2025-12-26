@@ -2,7 +2,8 @@ package com.example.demo.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import com.example.demo.entity.CredentialRecord;
 import java.util.List;
 import java.time.LocalDate;
@@ -14,7 +15,7 @@ public interface CredentialRecordRepository extends JpaRepository<CredentialReco
     CredentialRecord findByCredentialCode(String credentialCode);
 
     List<CredentialRecord> findByExpiryDateBefore(LocalDate date);
-    
+
     @Query("SELECT c FROM CredentialRecord c WHERE c.status = :status")
     List<CredentialRecord> findByStatusUsingHql(@Param("status") String status);
 
