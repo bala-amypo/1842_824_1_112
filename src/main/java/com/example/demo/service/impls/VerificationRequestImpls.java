@@ -7,23 +7,24 @@ import com.example.demo.repository.VerificationRuleRepository;
 import com.example.demo.entity.VerificationRequest;
 import com.example.demo.entity.CredentialRecord;
 import com.example.demo.exception.ResourceNotFoundException;
-import java.time.LocalDate;
-
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.time.LocalDateTime;
-import java.time.LocalDate;
-import java.lang.Long;
-
 
 @Service
 public class VerificationRequestImpls implements VerificationRequestService {
 
     @Autowired
     private VerificationRequestRepository vrr;
+
+    @Autowired
+    private CredentialRecordRepository credentialRepo;
+
+    @Autowired
+    private VerificationRuleRepository ruleRepo;
 
     @Override
     public VerificationRequest initiateVerification(VerificationRequest request) {
@@ -33,19 +34,28 @@ public class VerificationRequestImpls implements VerificationRequestService {
 
     @Override
     public VerificationRequest processVerification(Long requestId) {
-        VerificationRequest req = vrr.findById(requestId).orElseThrow(() -> new ResourceNotFoundException("Request not found"));
-        CredentialRecord cred = CredentialRecordRepository.findById(req.getCredentialId()).orElseThrow(() -> new ResourceNotFoundException("Credential missing"));
 
-        VerificationRuleRepository.findByActiveTrue();
+        VerificationRequest req = vrr.findById(requestId)
+                .orElseThrow(() -> new ResourceNotFoundException("Request not found"));
 
-    if (cred.getExpiryDate() != null && cred.getExpiryDate().isBefore(LocalDate.now())){
-        req.setStatus("FAILED");
-    } else {
-        req.setStatus("FAILED");
+        CredentialRecord cred = credentialRepo.findById(req.getCredentialId())
+                .orElseThrow(() -> new ResourceNotFoundException("Credential missing"));
+
+        // Load active rules (if needed)
+        ruleRepo.findByActiveTrue();
+
+        // Expiry Check
+        if (cred.getExpiryDate() != null &&
+                cred.getExpiryDate().isBefore(LocalDateTime.now())) {
+
+            req.setStatus("FAILED");
+        } else {
+            req.setStatus("SUCCESS");
+        }
+
+        req.setVerifiedAt(LocalDateTime.now());
+        return vrr.save(req);
     }
-    req.setVerifiedAt(LocalDateTime.now());
-    return vrr.save(req);
-}
 
     @Override
     public List<VerificationRequest> getRequestsByCredential(Long credentialId) {
