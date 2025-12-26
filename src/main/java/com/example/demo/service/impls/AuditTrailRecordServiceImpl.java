@@ -29,33 +29,26 @@
 //     }
 // }
 
-package com.example.demo.service.impl;
+package com.example.demo.service.impls;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.AuditTrailRecord;
 import com.example.demo.repository.AuditTrailRecordRepository;
 import com.example.demo.service.AuditTrailRecordService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class AuditTrailRecordServiceImpl implements AuditTrailRecordService {
 
-    private final AuditTrailRecordRepository auditRepo;
+    private final AuditTrailRecordRepository repository;
 
     @Override
-    public AuditTrailRecord logEvent(AuditTrailRecord record) {
-        if (record.getLoggedAt() == null) {
-            record.setLoggedAt(LocalDateTime.now());
-        }
-        return auditRepo.save(record);
-    }
-
-    @Override
-    public List<AuditTrailRecord> getLogsByCredential(Long credentialId) {
-        return auditRepo.findByCredentialId(credentialId);
+    public List<AuditTrailRecord> getAllLogs() {
+        return repository.findAll();
     }
 }
