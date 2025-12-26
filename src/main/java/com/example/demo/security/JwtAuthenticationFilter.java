@@ -1,4 +1,5 @@
 package com.example.demo.security;
+
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import org.springframework.context.annotation.Lazy;
@@ -14,21 +15,25 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtUtil jwtUtil;
     private final UserDetailsService uds;
+
     public JwtAuthenticationFilter(JwtUtil jwtUtil, @Lazy UserDetailsService uds) {
-        this.jwtUtil = jwtUtil; this.uds = uds;
+        this.jwtUtil = jwtUtil;
+        this.uds = uds;
     }
+
     @Override
-    protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws ServletException, IOException {
-        String auth = req.getHeader("Authorization");
-        if (auth != null && auth.startsWith("Bearer ")) {
-            String token = auth.substring(7);
+    protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain) 
+            throws ServletException, IOException {
+        String header = req.getHeader("Authorization");
+        if (header != null && header.startsWith("Bearer ")) {
+            String token = header.substring(7);
             String user = jwtUtil.extractUsername(token);
             if (user != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails details = uds.loadUserByUsername(user);
                 if (jwtUtil.validateToken(token, details)) {
-                    var upat = new UsernamePasswordAuthenticationToken(details, null, details.getAuthorities());
-                    upat.setDetails(new WebAuthenticationDetailsSource().buildDetails(req));
-                    SecurityContextHolder.getContext().setAuthentication(upat);
+                    var auth = new UsernamePasswordAuthenticationToken(details, null, details.getAuthorities());
+                    auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(req));
+                    SecurityContextHolder.getContext().setAuthentication(auth);
                 }
             }
         }
