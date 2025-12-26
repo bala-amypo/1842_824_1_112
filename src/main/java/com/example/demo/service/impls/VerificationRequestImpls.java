@@ -2,9 +2,11 @@ package com.example.demo.service.impls;
 
 import com.example.demo.service.VerificationRequestService;
 import com.example.demo.repository.VerificationRequestRepository;
+import com.example.demo.repository.CredentialRecordRepository;
 import com.example.demo.entity.VerificationRequest;
 import com.example.demo.entity.CredentialRecord;
 import com.example.demo.exception.ResourceNotFoundException;
+import java.time.LocalDate;
 
 
 import org.springframework.stereotype.Service;
@@ -30,7 +32,7 @@ public class VerificationRequestImpls implements VerificationRequestService {
     @Override
     public VerificationRequest processVerification(Long requestId) {
         VerificationRequest req = vrr.findById(requestId).orElseThrow(() -> new ResourceNotFoundException("Request not found"));
-        CredentialRecord cred = credentialRepo.findById(req.getCredentialId()).orElseThrow(() -> new ResourceNotFoundException("Credential missing"));
+        CredentialRecord cred = CredentialRecordRepository.findById(req.getCredentialId()).orElseThrow(() -> new ResourceNotFoundException("Credential missing"));
 
         ruleRepo.findByActiveTrue();
 
