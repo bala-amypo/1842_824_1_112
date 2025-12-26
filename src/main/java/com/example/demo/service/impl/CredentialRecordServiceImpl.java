@@ -14,7 +14,6 @@ public class CredentialRecordServiceImpl implements CredentialRecordService {
 
     @Override
     public CredentialRecord createCredential(CredentialRecord record) {
-        // PDF 2.3 logic
         if (record.getExpiryDate() != null && record.getExpiryDate().isBefore(LocalDate.now())) {
             record.setStatus("EXPIRED");
         } else if (record.getStatus() == null) {

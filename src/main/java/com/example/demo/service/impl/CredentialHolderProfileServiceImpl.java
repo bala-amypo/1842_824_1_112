@@ -9,26 +9,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class CredentialHolderProfileServiceImpl implements CredentialHolderProfileService {
     private final CredentialHolderProfileRepository holderRepo;
-
-    public CredentialHolderProfileServiceImpl(CredentialHolderProfileRepository holderRepo) {
-        this.holderRepo = holderRepo;
-    }
+    public CredentialHolderProfileServiceImpl(CredentialHolderProfileRepository repo) { this.holderRepo = repo; }
 
     @Override
-    public CredentialHolderProfile createHolder(CredentialHolderProfile profile) {
-        return holderRepo.save(profile);
-    }
+    public CredentialHolderProfile createHolder(CredentialHolderProfile profile) { return holderRepo.save(profile); }
 
     @Override
     public CredentialHolderProfile getHolderById(Long id) {
-        return holderRepo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Holder not found"));
+        return holderRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Not found"));
     }
 
     @Override
     public CredentialHolderProfile updateStatus(Long id, boolean active) {
-        CredentialHolderProfile existing = getHolderById(id);
-        existing.setActive(active);
-        return holderRepo.save(existing);
+        CredentialHolderProfile p = getHolderById(id);
+        p.setActive(active);
+        return holderRepo.save(p);
     }
 }
