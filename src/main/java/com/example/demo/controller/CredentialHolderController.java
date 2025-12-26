@@ -15,7 +15,7 @@ import com.example.demo.service.CredentialHolderProfileService;
 import java.util.List;
 
 @RestController
-public class CredentialHolderProfileController {
+public class CredentialHolderController {
 
     @Autowired
     private CredentialHolderProfileService chps;
