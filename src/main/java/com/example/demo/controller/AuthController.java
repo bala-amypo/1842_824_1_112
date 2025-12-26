@@ -40,7 +40,7 @@ public class AuthController {
 
         return ResponseEntity.ok(
                 new JwtResponse(
-                        String.valueOf(saved.getId()),
+                        saved.getId(), // Fixed: Passing Long directly
                         saved.getEmail(),
                         saved.getRole(),
                         token
@@ -71,7 +71,7 @@ public class AuthController {
 
         return ResponseEntity.ok(
                 new JwtResponse(
-                        String.valueOf(user.getId()),
+                        user.getId(), // Fixed: Passing Long directly
                         user.getEmail(),
                         user.getRole(),
                         token
