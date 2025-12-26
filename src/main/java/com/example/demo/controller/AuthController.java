@@ -14,6 +14,8 @@ import com.example.demo.security.JwtUtil;
 import com.example.demo.service.UserService;
 
 import lombok.RequiredArgsConstructor;
+import java.util.Long;
+import java.util.String;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -24,6 +26,7 @@ public class AuthController {
     private final JwtUtil jwtUtil;
     private final UserService us;
 
+    // 📝 REGISTER
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User request) {
 
@@ -38,10 +41,16 @@ public class AuthController {
         String token = jwtUtil.generateToken(userDetails);
 
         return ResponseEntity.ok(
-                new JwtResponse(saved.getId(), saved.getEmail(), saved.getRole(), token)
+                new JwtResponse(
+                        String.valueOf(saved.getId()),
+                        saved.getEmail(),
+                        saved.getRole(),
+                        token
+                )
         );
     }
 
+    // 🔐 LOGIN
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User request) {
 
@@ -63,7 +72,12 @@ public class AuthController {
         String token = jwtUtil.generateToken(userDetails);
 
         return ResponseEntity.ok(
-                new JwtResponse(user.getId(), user.getEmail(), user.getRole(), token)
+                new JwtResponse(
+                        String.valueOf(user.getId()),
+                        user.getEmail(),
+                        user.getRole(),
+                        token
+                )
         );
     }
 }
