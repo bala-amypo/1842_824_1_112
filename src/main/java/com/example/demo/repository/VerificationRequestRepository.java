@@ -1,23 +1,13 @@
-// package com.example.demo.repository;
-
-// import org.springframework.data.jpa.repository.JpaRepository;
-// import org.springframework.stereotype.Repository;
-
-// import com.example.demo.entity.VerificationRequest;
-// import java.util.List;
-// import java.lang.Long;
-
-// @Repository
-// public interface VerificationRequestRepository extends JpaRepository<VerificationRequest, Long>{
-//     List<VerificationRequest> findByCredentialId(Long credentialId);
-// }
-
 package com.example.demo.repository;
 
-import com.example.demo.entity.VerificationRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.List;
+import org.springframework.stereotype.Repository;
 
-public interface VerificationRequestRepository extends JpaRepository<VerificationRequest, Long> {
+import com.example.demo.entity.VerificationRequest;
+import java.util.List;
+import java.lang.Long;
+
+@Repository
+public interface VerificationRequestRepository extends JpaRepository<VerificationRequest, Long>{
     List<VerificationRequest> findByCredentialId(Long credentialId);
 }
