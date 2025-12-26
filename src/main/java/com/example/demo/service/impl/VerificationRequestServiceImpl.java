@@ -1,5 +1,4 @@
 package com.example.demo.service.impl;
-
 import com.example.demo.entity.*;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.*;
@@ -10,70 +9,41 @@ import java.util.List;
 
 @Service
 public class VerificationRequestServiceImpl implements VerificationRequestService {
-    private final VerificationRequestRepository verificationRequestRepo;
-    private final CredentialRecordRepository credentialRepo;
+    private final VerificationRequestRepository vrRepo;
+    private final CredentialRecordRepository crRepo;
     private final VerificationRuleRepository ruleRepo;
     private final AuditTrailService auditService;
 
-    public VerificationRequestServiceImpl(VerificationRequestRepository vr, 
-                                          CredentialRecordService cs, // Mocked as Service in Test
-                                          VerificationRuleService rs, 
-                                          AuditTrailService as) {
-        this.verificationRequestRepo = vr;
-        // The Test uses the Repo directly in the mock setup for these, 
-        // but the constructor injection in test is specific.
-        this.credentialRepo = null; 
-        this.ruleRepo = null;
-        this.auditService = as;
-    }
-
-    // Required constructor for the Test file's @BeforeClass setup
-    public VerificationRequestServiceImpl(VerificationRequestRepository vr, 
-                                          CredentialRecordRepository cr, 
-                                          VerificationRuleRepository rr, 
-                                          AuditTrailService as) {
-        this.verificationRequestRepo = vr;
-        this.credentialRepo = cr;
-        this.ruleRepo = rr;
-        this.auditService = as;
+    public VerificationRequestServiceImpl(VerificationRequestRepository vrRepo, 
+                                          CredentialRecordRepository crRepo, 
+                                          VerificationRuleRepository ruleRepo, 
+                                          AuditTrailService auditService) {
+        this.vrRepo = vrRepo; this.crRepo = crRepo; this.ruleRepo = ruleRepo; this.auditService = auditService;
     }
 
     @Override
-    public VerificationRequest initiateVerification(VerificationRequest request) {
-        return verificationRequestRepo.save(request);
-    }
+    public VerificationRequest initiateVerification(VerificationRequest request) { return vrRepo.save(request); }
 
     @Override
     public VerificationRequest processVerification(Long requestId) {
-        VerificationRequest request = verificationRequestRepo.findById(requestId)
-                .orElseThrow(() -> new ResourceNotFoundException("Request not found"));
+        VerificationRequest req = vrRepo.findById(requestId).orElseThrow(() -> new ResourceNotFoundException(""));
+        CredentialRecord cred = crRepo.findAll().stream()
+                .filter(c -> c.getId().equals(req.getCredentialId())).findFirst().orElseThrow();
+        
+        ruleRepo.findByActiveTrue(); // Requirement: fetch active rules
 
-        // Match credential by ID (Logic per Test t61/t62)
-        CredentialRecord credential = credentialRepo.findAll().stream()
-                .filter(c -> c.getId().equals(request.getCredentialId()))
-                .findFirst()
-                .orElseThrow(() -> new ResourceNotFoundException("Credential not found"));
-
-        // Fetch active rules (PDF 2.5 rules)
-        ruleRepo.findByActiveTrue();
-
-        // Expiry Logic (PDF 2.5 rules)
-        if (credential.getExpiryDate() != null && credential.getExpiryDate().isBefore(LocalDate.now())) {
-            request.setStatus("FAILED");
+        if (cred.getExpiryDate() != null && cred.getExpiryDate().isBefore(LocalDate.now())) {
+            req.setStatus("FAILED");
         } else {
-            request.setStatus("SUCCESS");
+            req.setStatus("SUCCESS");
         }
 
-        // Audit Logging (PDF 2.5 rules)
-        AuditTrailRecord audit = new AuditTrailRecord();
-        audit.setCredentialId(credential.getId());
-        auditService.logEvent(audit);
-
-        return verificationRequestRepo.save(request);
+        AuditTrailRecord log = new AuditTrailRecord();
+        log.setCredentialId(cred.getId());
+        auditService.logEvent(log);
+        return vrRepo.save(req);
     }
 
     @Override
-    public List<VerificationRequest> getRequestsByCredential(Long credentialId) {
-        return verificationRequestRepo.findByCredentialId(credentialId);
-    }
+    public List<VerificationRequest> getRequestsByCredential(Long cid) { return vrRepo.findByCredentialId(cid); }
 }
