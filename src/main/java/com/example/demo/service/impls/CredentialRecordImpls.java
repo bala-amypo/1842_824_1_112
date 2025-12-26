@@ -1,3 +1,5 @@
+package com.example.demo.service.impls;
+
 import com.example.demo.service.CredentialRecordService;
 import com.example.demo.repository.CredentialRecordRepository;
 import com.example.demo.entity.CredentialRecord;
@@ -24,16 +26,25 @@ public class CredentialRecordImpls implements CredentialRecordService {
     @Override
     public CredentialRecord updateCredential(Long id, CredentialRecord updated) {
         CredentialRecord existing = crr.findById(id)
-            .orElseThrow(() -> new RuntimeException("Credential not found"));
+            .orElseThrow(() -> new RuntimeException("Credential not found with ID: " + id));
+
         existing.setCredentialCode(updated.getCredentialCode());
         existing.setHolderId(updated.getHolderId());
         existing.setStatus(updated.getStatus());
+        existing.setIssueDate(updated.getIssueDate());
+        existing.setExpiryDate(updated.getExpiryDate());
+
         return crr.save(existing);
     }
 
     @Override
     public List<CredentialRecord> getAllCredentials() {
         return crr.findAll();
+    }
+
+    @Override
+    public CredentialRecord getCredentialById(Long id) {
+        return crr.findById(id).orElseThrow(() -> new RuntimeException("Credential not found"));
     }
 
     @Override
@@ -59,5 +70,12 @@ public class CredentialRecordImpls implements CredentialRecordService {
     @Override
     public List<CredentialRecord> searchByIssuerAndType(String issuer, String type) {
         return crr.searchByIssuerAndType(issuer, type);
+    }
+
+    // ⭐ FIXED: Missing implementation added
+    @Override
+    public String deleteCredential(Long id) {
+        crr.deleteById(id);
+        return "Deleted successfully: " + id;
     }
 }
