@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Service
-public class VerificationRuleImpls implements VerificationRuleService {
+public class VerificationRuleServiceImpl implements VerificationRuleService {
 
     @Autowired
     private VerificationRuleRepository vrr;
