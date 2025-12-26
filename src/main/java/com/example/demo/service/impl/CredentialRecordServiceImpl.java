@@ -1,16 +1,19 @@
 package com.example.demo.service.impl;
+
 import com.example.demo.entity.CredentialRecord;
 import com.example.demo.repository.CredentialRecordRepository;
 import com.example.demo.service.CredentialRecordService;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CredentialRecordServiceImpl implements CredentialRecordService {
     private final CredentialRecordRepository credentialRepo;
-    public CredentialRecordServiceImpl(CredentialRecordRepository repo) { this.credentialRepo = repo; }
+
+    public CredentialRecordServiceImpl(CredentialRecordRepository credentialRepo) {
+        this.credentialRepo = credentialRepo;
+    }
 
     @Override
     public CredentialRecord createCredential(CredentialRecord record) {
