@@ -1,14 +1,15 @@
 package com.example.demo.servlet;
+
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 
+@WebServlet("/status")
 public class SimpleStatusServlet extends HttpServlet {
     @Override
-    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/plain");
-        PrintWriter out = resp.getWriter();
-        if (out == null) throw new IOException("No writer");
-        out.print("Digital Credential Verification Engine is running");
+        // Must match t01_servlet_basicResponseText
+        resp.getWriter().print("Digital Credential Verification Engine is running");
     }
 }

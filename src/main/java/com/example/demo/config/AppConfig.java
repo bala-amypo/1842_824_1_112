@@ -1,4 +1,5 @@
 package com.example.demo.config;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,9 +10,13 @@ public class AppConfig {
     public PasswordEncoder passwordEncoder() {
         return new PasswordEncoder() {
             @Override
-            public String encode(CharSequence rawPassword) { return rawPassword + "_ENC"; }
+            public String encode(CharSequence rawPassword) {
+                return rawPassword + "_ENC";
+            }
             @Override
-            public boolean matches(CharSequence raw, String encoded) { return encoded.equals(raw + "_ENC"); }
+            public boolean matches(CharSequence rawPassword, String encodedPassword) {
+                return encodedPassword.equals(rawPassword + "_ENC");
+            }
         };
     }
 }
