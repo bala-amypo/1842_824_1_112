@@ -1,4 +1,5 @@
 package com.example.demo.service.impl;
+
 import com.example.demo.entity.User;
 import com.example.demo.exception.BadRequestException;
 import com.example.demo.exception.ResourceNotFoundException;
@@ -14,13 +15,14 @@ import java.util.Collections;
 public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository repo;
     private final PasswordEncoder encoder;
-    public UserServiceImpl(UserRepository repo, PasswordEncoder encoder) { 
-        this.repo = repo; this.encoder = encoder; 
+
+    public UserServiceImpl(UserRepository repo, PasswordEncoder encoder) {
+        this.repo = repo; this.encoder = encoder;
     }
 
     @Override
     public User registerUser(User user) {
-        if (repo.existsByEmail(user.getEmail())) throw new BadRequestException("Duplicate email");
+        if (repo.existsByEmail(user.getEmail())) throw new BadRequestException("Email exists");
         user.setPassword(encoder.encode(user.getPassword()));
         return repo.save(user);
     }
@@ -33,7 +35,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = repo.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(email));
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), 
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
                 Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole())));
     }
 }

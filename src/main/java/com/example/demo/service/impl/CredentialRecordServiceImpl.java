@@ -9,36 +9,30 @@ import java.util.List;
 
 @Service
 public class CredentialRecordServiceImpl implements CredentialRecordService {
-    private final CredentialRecordRepository credentialRepo;
-
-    public CredentialRecordServiceImpl(CredentialRecordRepository credentialRepo) {
-        this.credentialRepo = credentialRepo;
-    }
+    private final CredentialRecordRepository repo;
+    public CredentialRecordServiceImpl(CredentialRecordRepository repo) { this.repo = repo; }
 
     @Override
     public CredentialRecord createCredential(CredentialRecord record) {
+        // PDF 2.3 logic
         if (record.getExpiryDate() != null && record.getExpiryDate().isBefore(LocalDate.now())) {
             record.setStatus("EXPIRED");
         } else if (record.getStatus() == null) {
             record.setStatus("VALID");
         }
-        return credentialRepo.save(record);
+        return repo.save(record);
     }
 
     @Override
     public CredentialRecord updateCredential(Long id, CredentialRecord update) {
-        CredentialRecord existing = credentialRepo.findById(id).orElseThrow();
+        CredentialRecord existing = repo.findById(id).orElseThrow();
         if (update.getCredentialCode() != null) existing.setCredentialCode(update.getCredentialCode());
-        return credentialRepo.save(existing);
+        return repo.save(existing);
     }
 
     @Override
-    public List<CredentialRecord> getCredentialsByHolder(Long holderId) {
-        return credentialRepo.findByHolderId(holderId);
-    }
+    public List<CredentialRecord> getCredentialsByHolder(Long holderId) { return repo.findByHolderId(holderId); }
 
     @Override
-    public CredentialRecord getCredentialByCode(String code) {
-        return credentialRepo.findByCredentialCode(code).orElse(null);
-    }
+    public CredentialRecord getCredentialByCode(String code) { return repo.findByCredentialCode(code).orElse(null); }
 }
