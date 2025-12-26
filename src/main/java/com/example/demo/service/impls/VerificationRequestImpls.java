@@ -4,6 +4,8 @@ import com.example.demo.service.VerificationRequestService;
 import com.example.demo.repository.VerificationRequestRepository;
 import com.example.demo.entity.VerificationRequest;
 import com.example.demo.entity.CredentialRecord;
+import com.example.demo.exception.ResourceNotFoundException;
+
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
