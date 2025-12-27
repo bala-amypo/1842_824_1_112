@@ -13,13 +13,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 public class SecurityConfig {
-    // private final JwtAuthenticationFilter jwtFilter;
-    // public SecurityConfig(JwtAuthenticationFilter jwtFilter) { this.jwtFilter = jwtFilter; }
+    private final JwtAuthenticationFilter jwtFilter;
+    public SecurityConfig(JwtAuthenticationFilter jwtFilter) { this.jwtFilter = jwtFilter; }
 
-    // @Bean
-    // public AuthenticationManager authenticationManager(AuthenticationConfiguration auth) throws Exception {
-    //     return auth.getAuthenticationManager();
-    // }
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration auth) throws Exception {
+        return auth.getAuthenticationManager();
+    }
 
     // @Bean
     // public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
