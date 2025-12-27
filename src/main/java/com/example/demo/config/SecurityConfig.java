@@ -28,7 +28,7 @@ public class SecurityConfig {
         http
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth -> auth
-                // Allow root "/", auth endpoints, and Swagger
+                // Permitting "/" ensures you don't get a 403 error on the home page
                 .requestMatchers("/", "/auth/**", "/swagger-ui/**", "/v3/api-docs/**", "/status").permitAll()
                 .anyRequest().authenticated()
             )
