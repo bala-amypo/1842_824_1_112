@@ -25,7 +25,6 @@ public class AppConfig {
 
     /**
      * Requirement (PDF Page 7): Encode password with "_ENC" suffix.
-     * This is required for the automated test suite.
      */
     @Bean
     public PasswordEncoder passwordEncoder() {
