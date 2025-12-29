@@ -32,7 +32,7 @@ public class AppConfig {
                 .map(user -> org.springframework.security.core.userdetails.User.builder()
                         .username(user.getEmail())
                         .password(user.getPassword())
-                        .authorities(user.getRole()) // Uses the 'role' field from your User entity
+                        .authorities(user.getRole()) // Maps your entity role field
                         .build())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
     }
