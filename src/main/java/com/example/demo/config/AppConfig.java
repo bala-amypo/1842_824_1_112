@@ -17,7 +17,6 @@ public class AppConfig {
 
     private final UserRepository userRepository;
 
-    // Project Requirement: Constructor Injection
     public AppConfig(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -33,7 +32,7 @@ public class AppConfig {
                 .map(user -> org.springframework.security.core.userdetails.User.builder()
                         .username(user.getEmail())
                         .password(user.getPassword())
-                        .authorities(user.getRole()) // Matches your 'role' field
+                        .authorities(user.getRole())
                         .build())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
     }
