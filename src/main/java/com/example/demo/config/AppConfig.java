@@ -23,18 +23,22 @@ public class AppConfig {
         this.userRepository = userRepository;
     }
 
+    /**
+     * Requirement (PDF Page 7): Encode password with "_ENC" suffix.
+     * This is required for the automated test suite.
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new PasswordEncoder() {
             @Override
             public String encode(CharSequence rawPassword) {
-                // Requirement PDF Page 7: suffix "_ENC"
                 return rawPassword.toString() + "_ENC";
             }
 
             @Override
             public boolean matches(CharSequence rawPassword, String encodedPassword) {
-                return encodedPassword != null && encodedPassword.equals(rawPassword.toString() + "_ENC");
+                if (encodedPassword == null) return false;
+                return encodedPassword.equals(rawPassword.toString() + "_ENC");
             }
         };
     }
