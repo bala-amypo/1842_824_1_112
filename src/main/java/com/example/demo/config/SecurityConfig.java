@@ -17,7 +17,6 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
 
-    // Project Requirement: Constructor Injection
     public SecurityConfig(JwtAuthenticationFilter jwtAuthFilter, AuthenticationProvider authenticationProvider) {
         this.jwtAuthFilter = jwtAuthFilter;
         this.authenticationProvider = authenticationProvider;
@@ -28,11 +27,11 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                // Registration and Login must remain public (as per PDF page 1)
+                // Public endpoints as per PDF (Page 1 & 8)
                 .requestMatchers("/auth/**", "/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
-                // SimpleStatusServlet must be public (as per PDF page 3)
-                .requestMatchers("/servlet/SimpleStatusServlet").permitAll() 
-                // All protected APIs (as per PDF page 1)
+                // The SimpleStatusServlet must be accessible (Page 3)
+                .requestMatchers("/SimpleStatusServlet").permitAll() 
+                // All other /api/ paths require JWT (Page 1 & 5)
                 .requestMatchers("/api/**").authenticated()
                 .anyRequest().authenticated()
             )
