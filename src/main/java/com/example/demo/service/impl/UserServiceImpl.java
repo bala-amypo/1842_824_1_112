@@ -13,22 +13,24 @@ import java.util.Collections;
 public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository repo;
     private final PasswordEncoder encoder;
-    public UserServiceImpl(UserRepository repo, PasswordEncoder encoder) { this.repo = repo; this.encoder = encoder; }
+
+    public UserServiceImpl(UserRepository repo, PasswordEncoder encoder) { 
+        this.repo = repo; 
+        this.encoder = encoder; 
+    }
 
     @Override
-    public User registerUser(User user) {
-        if (repo.existsByEmail(user.getEmail())) throw new BadRequestException("Email exists");
-        user.setPassword(encoder.encode(user.getPassword()));
-        return repo.save(user);
-    }
-    @Override
-    public User findByEmail(String email) {
-        return repo.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("Not found"));
-    }
-    @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User u = repo.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(email));
-        return new org.springframework.security.core.userdetails.User(u.getEmail(), u.getPassword(),
-                Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + u.getRole())));
+        // Use a direct find - ensure this doesn't trigger extra security logic
+        User u = repo.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+        
+        return org.springframework.security.core.userdetails.User.builder()
+                .username(u.getEmail())
+                .password(u.getPassword())
+                .authorities("ROLE_" + u.getRole()) // Ensure u.getRole() returns "USER" or "ADMIN"
+                .build();
     }
+    
+    // ... rest of your methods
 }

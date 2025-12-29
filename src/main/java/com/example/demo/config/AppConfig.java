@@ -2,17 +2,13 @@ package com.example.demo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class AppConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new PasswordEncoder() {
-            @Override
-            public String encode(CharSequence raw) { return raw + "_ENC"; }
-            @Override
-            public boolean matches(CharSequence raw, String enc) { return enc.equals(raw + "_ENC"); }
-        };
+        return new BCryptPasswordEncoder();
     }
 }
