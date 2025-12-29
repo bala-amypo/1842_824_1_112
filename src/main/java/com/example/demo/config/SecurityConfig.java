@@ -39,7 +39,6 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
             )
 
-            // 4. STATELESS SESSION (No cookies/sessions)
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             
             .authenticationProvider(authenticationProvider)
