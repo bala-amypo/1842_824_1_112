@@ -23,14 +23,12 @@ public class AppConfig {
         this.userRepository = userRepository;
     }
 
-    /**
-     * Requirement (PDF Page 7): Encode password with "_ENC" suffix.
-     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new PasswordEncoder() {
             @Override
             public String encode(CharSequence rawPassword) {
+                // Requirement PDF Page 7: suffix "_ENC"
                 return rawPassword.toString() + "_ENC";
             }
 

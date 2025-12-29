@@ -27,7 +27,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .csrf(AbstractHttpConfigurer::disable)
-            .cors(AbstractHttpConfigurer::disable) // Disable if handled by Nginx, or keep enabled
+            .cors(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/auth/**", "/error", "/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html", "/SimpleStatusServlet").permitAll()
                 .requestMatchers("/api/**").authenticated()
