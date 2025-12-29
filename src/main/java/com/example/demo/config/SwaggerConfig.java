@@ -23,7 +23,7 @@ public class SwaggerConfig {
                         .title("Demo API")
                         .version("1.0")
                         .description("API documentation with JWT Authentication"))
-                // This adds your specific server URL to Swagger
+                        
                 .servers(List.of(new Server().url("https://9046.32procr.amypo.ai/")))
                 // This makes the 'Authorize' button work
                 .addSecurityItem(new SecurityRequirement()
