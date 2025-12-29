@@ -10,8 +10,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher; // Import this
-
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher; 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -27,21 +26,16 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            // 1. COMPLETELY DISABLE CSRF (This is usually the cause of 403 on POST)
             .csrf(AbstractHttpConfigurer::disable)
             
-            // 2. DISABLE CORS (For testing)
             .cors(AbstractHttpConfigurer::disable)
 
-            // 3. DEFINE PERMISSIONS
             .authorizeHttpRequests(auth -> auth
-                // Use AntPathRequestMatcher for better path matching in Spring Boot 3
                 .requestMatchers(new AntPathRequestMatcher("/auth/**")).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/swagger-ui/**")).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/v3/api-docs/**")).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/status")).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/")).permitAll()
-                // All other requests need a token
                 .anyRequest().authenticated()
             )
 
