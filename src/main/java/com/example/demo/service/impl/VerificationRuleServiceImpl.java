@@ -16,7 +16,6 @@ public class VerificationRuleServiceImpl implements VerificationRuleService {
 
     @Override
     public VerificationRule createRule(VerificationRule rule) {
-        // PDF Section 6.3: Implement logic as specified in the entity rules section
         return ruleRepo.save(rule);
     }
 }

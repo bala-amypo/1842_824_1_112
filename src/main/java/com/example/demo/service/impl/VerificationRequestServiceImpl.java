@@ -16,7 +16,6 @@ public class VerificationRequestServiceImpl implements VerificationRequestServic
     private final VerificationRuleService ruleService;
     private final AuditTrailService auditService;
 
-    // This constructor matches exactly what line 72 of the Test file expects
     public VerificationRequestServiceImpl(VerificationRequestRepository verificationRequestRepo,
                                           CredentialRecordService credentialService,
                                           VerificationRuleService ruleService,
@@ -37,16 +36,11 @@ public class VerificationRequestServiceImpl implements VerificationRequestServic
         VerificationRequest request = verificationRequestRepo.findById(requestId)
                 .orElseThrow(() -> new ResourceNotFoundException("Request not found"));
 
-        // Use the service to find the credential (Test t61/t62 mock this call)
         CredentialRecord credential = credentialService.getAllCredentials().stream()
                 .filter(c -> c.getId().equals(request.getCredentialId()))
                 .findFirst()
                 .orElseThrow(() -> new ResourceNotFoundException("Credential not found"));
 
-        // Test t61/t62 expects ruleRepo.findByActiveTrue() to be called via the service
-        // Since the test mocks the repo, we just need to trigger the service method
-        // (Assuming ruleService has a method that calls the repo)
-        // ruleService.getActiveRules(); 
 
         if (credential.getExpiryDate() != null && credential.getExpiryDate().isBefore(LocalDate.now())) {
             request.setStatus("FAILED");
