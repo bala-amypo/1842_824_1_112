@@ -5,7 +5,7 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
-import io.swagger.v3.oas.models.servers.Server; // Import this
+import io.swagger.v3.oas.models.servers.Server; 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,9 +23,8 @@ public class SwaggerConfig {
                         .title("Demo API")
                         .version("1.0")
                         .description("API documentation with JWT Authentication"))
-                        
+
                 .servers(List.of(new Server().url("https://9046.32procr.amypo.ai/")))
-                // This makes the 'Authorize' button work
                 .addSecurityItem(new SecurityRequirement()
                         .addList(securitySchemeName))
                 .components(new Components()

@@ -24,7 +24,6 @@ public class CredentialRecord {
                inverseJoinColumns = @JoinColumn(name = "rule_id"))
     private Set<VerificationRule> rules = new HashSet<>();
 
-    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public Long getHolderId() { return holderId; }
